@@ -4,7 +4,7 @@ title:  "Spring Cloud Zuul 路由网关"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: SpringCloud
-description:在微服务架构中，需要几个基础的服务治理组件，包括服务注册与发现、服务消费、负载均衡、断路器、智能路由、配置管理等，由这几个基础组件相互协作，共同组建了一个简单的微服务系统。
+description: 在微服务架构中，需要几个基础的服务治理组件，包括服务注册与发现、服务消费、负载均衡、断路器、智能路由、配置管理等，由这几个基础组件相互协作，共同组建了一个简单的微服务系统。
 ---
 ### 微服务构架
 ![微服务构架](https://i.imgur.com/COoCyXU.png)
