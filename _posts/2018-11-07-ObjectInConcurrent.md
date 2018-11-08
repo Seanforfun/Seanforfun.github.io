@@ -3,7 +3,7 @@ layout: post
 title:  "Publish Object 发布对象"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
-categories: Concurrency JVM
+categories: Concurrent JVM
 description: 对象不正确的发布会造成线程的不安全，所以本文总结了对象不安全发布的例子和几种安全发布对象的方法。
 ---
 对象不正确的发布会造成线程的不安全，所以本文总结了对象不安全发布的例子和几种安全发布对象的方法。
