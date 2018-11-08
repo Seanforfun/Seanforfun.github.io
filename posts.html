@@ -4,7 +4,8 @@ title: "Posts"
 permalink: /posts/
 ---
 
-{% for category in site.categories %}  
+{% assign items = site.categories | sort %}
+{% for category in items %}  
   {% capture cat %}{{ category | first }}{% endcapture %}
   {% if category[0] == "Leetcode" %}
     {% continue %}

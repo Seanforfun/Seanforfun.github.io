@@ -10,6 +10,7 @@ permalink: /task/
 </div>
 
 - [ ] Terminate the alphamatting project.
+- [x] Merge my conclusions of Algorithm and data structure to this website.
 - [ ] Write first 100 leetcode problems twice.
 - [ ] Write a page for listing my achievements in deep learning field.
 - [ ] Watch the series of Java high concurrency on Youtube.
