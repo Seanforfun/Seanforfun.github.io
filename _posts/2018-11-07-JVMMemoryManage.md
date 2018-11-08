@@ -4,7 +4,8 @@ title:  "Java memory management 自动内存管理机制"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: JVM
-description: 
+comment: true
+description:
 ---
 ### 运行时数据区域
 ![JVM ram areas](https://i.imgur.com/5a3nvpz.jpg)
@@ -190,7 +191,7 @@ public class GCCollection {
 
 	* 从垃圾回收日志中可以获取一些信息,可以看到回收了10240K，即为1MB。
 ```
-0.121: [GC (System.gc()) [PSYoungGen: 5243K->648K(9216K)] 5243K->4752K(19456K), 0.0054301 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+0.121: [GC (System.gc()) [PSYoungGen: 5243K->648K(9216K)] 5243K->4752K(19456K), 0.0054301 secs] [Times: user=0.00 sys=0.00, real=0.01 secs]
 0.127: [Full GC (System.gc()) [PSYoungGen: 648K->0K(9216K)] [ParOldGen: 4104K->4631K(10240K)] 4752K->4631K(19456K), [Metaspace: 2737K->2737K(1056768K)], 0.0065591 secs] [Times: user=0.05 sys=0.00, real=0.01 secs]
 ```
 
@@ -311,7 +312,7 @@ ca.mcmaster.jvm.GCCollection@15db9742
  * -Xms20m
  * -Xmx20m
  * -Xmn10M
- * -XX:+PrintGCTimeStamps 
+ * -XX:+PrintGCTimeStamps
  * -XX:+PrintGCDetails
  * -verbose:gc
  * -Xloggc:f:/dump/dc.log

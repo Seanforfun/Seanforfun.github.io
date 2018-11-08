@@ -3,6 +3,7 @@ layout: post
 title:  "Spring Cloud注册与发现"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
+comment: true
 categories: SpringCloud
 ---
 ### 创建Server和Client

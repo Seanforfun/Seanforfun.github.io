@@ -4,6 +4,7 @@ title:  "Abstract Factory 抽象工厂"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DesignPattern
+comment: true
 description: 抽象工厂意图修复工厂方法的一个缺点：一个具体工厂只能创建一类产品。提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类；具体的工厂负责实现具体的产品实例。
 ---
 > 抽象工厂意图修复工厂方法的一个缺点：一个具体工厂只能创建一类产品

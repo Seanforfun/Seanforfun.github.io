@@ -4,6 +4,7 @@ title:  "Spring Cloud Ribbon"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: SpringCloud
+comment: true
 description: Ribbon是一个Client端的负载均衡器。在同一个服务多次启动的时候，会形成一个集群，而Ribbon的作用就是使服务在集群中负载均衡。
 ---
 ### Ribbon

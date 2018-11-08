@@ -4,6 +4,7 @@ title:  "Composite Pattern 组合模式"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DesignPattern
+comment: true
 description: 组合模式定义了如何将容器对象和叶子对象进行递归组合，使得客户在使用的过程中无须进行区分，可以对他们进行一致的处理。
 ---
 # Composite Pattern 组合模式

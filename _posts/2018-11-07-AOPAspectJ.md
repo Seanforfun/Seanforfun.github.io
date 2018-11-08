@@ -4,6 +4,7 @@ title:  "AspectJ in Spring"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: Spring
+comment: true
 description: Spring与Aspect整合实现。
 ---
 # AspectJ in Spring
@@ -39,7 +40,7 @@ public @interface Reviews {
 
 * 反射中调用注解并读取信息
 ```Java
-@Reviews({@Review(value=Grade.EXCELLENT, reviewer="Seanforfun"), 
+@Reviews({@Review(value=Grade.EXCELLENT, reviewer="Seanforfun"),
 		@Review(value=Grade.UNSATISFACTORY, reviewer="Sean")})
 	public static void annotationFieldTest() throws Exception{
 		Method testMethod = AnnotationTest.class.getDeclaredMethod("annotationFieldTest", null);

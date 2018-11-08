@@ -4,6 +4,7 @@ title:  "Spring高级属性"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: JavaCore Concurrent
+comment: true
 description: Spring的高级属性讲解。
 ---
 # Spring高级属性

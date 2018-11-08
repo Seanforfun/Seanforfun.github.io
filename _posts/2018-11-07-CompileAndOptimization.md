@@ -4,6 +4,7 @@ title:  "Compile And Optimization"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: JVM
+comment: true
 description: JVM的编译和优化。
 ---
 ### 早期（编译期）优化

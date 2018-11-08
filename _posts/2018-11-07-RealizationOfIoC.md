@@ -4,6 +4,7 @@ title:  "IoC 反转控制"
 date:   2018-11-07 19:43:59
 author: Botao Xiao
 categories: Spring
+comment: true
 description: 面向对象的处理中，对象封装了数据和堆数据的处理，对象的依赖关系常常体现在对数据和方法的依赖上。所以我们可以将对象之间的依赖交给IoC容器去处理，减少了对象之间的耦合。
 ---
 # IoC 反转控制

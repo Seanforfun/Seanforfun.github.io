@@ -4,6 +4,7 @@ title:  "Template Method 模板方法"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DesignPattern
+comment: true
 description: 定义一个算法中的操作框架，而将一些步骤延迟到子类中。使得子类可以不改变算法的结构即可重定义该算法的某些特定步骤。
 ---
 > 定义一个算法中的操作框架，而将一些步骤延迟到子类中。使得子类可以不改变算法的结构即可重定义该算法的某些特定步骤。

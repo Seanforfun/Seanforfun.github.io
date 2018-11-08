@@ -3,6 +3,7 @@ layout: post
 title:  "Annotation 注解"
 date:   2018-11-07 19:56:59
 author: Botao Xiao
+comment: true
 categories: JavaCore Concurrent
 description: 在通过Springboot编写SeanforfunBlog的时候，我大量接触Spring4.x的注解，在一开始学习java的时候我只是粗略的学习了注解的开发和使用，这导致我在对比Spring3.x和Spring4.x的过程中出现了大量的不理解，花费了大量的时间。而从servlet2.5到servlet3.0的升级中，完全抛弃了web.xml的配置而是转为注解式开发更坚定了我想要对注解的研究。所谓磨刀不误砍柴工，我决定暂时停下手上所有的事情从JAVA基础上研究Annotation的原理。
 ---

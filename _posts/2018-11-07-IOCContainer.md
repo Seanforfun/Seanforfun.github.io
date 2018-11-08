@@ -4,6 +4,7 @@ title:  "IOC Container"
 date:   2018-11-07 19:43:59
 author: Botao Xiao
 categories: Spring
+comment: true
 description: Spring容器的总结和应用。
 ---
 # IOC Container

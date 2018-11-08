@@ -4,6 +4,7 @@ title:  "Singleton 单例模式"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DesignPattern
+comment: true
 description: 单例模式保证了在JVM中，只有一个对象的实例。 本文介绍了单例模式下的懒汉模式和饿汉模式。
 ---
 * 单例模式保证了在JVM中，只有一个对象的实例，这有如下的好处：

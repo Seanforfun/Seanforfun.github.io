@@ -4,6 +4,7 @@ title:  "Spring Cloud Bus 消息总线"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: SpringCloud
+comment: true
 description: 消息队列可以简单地使用FIFO队列实现，但是消息队列是存在在栈中的，只有一个进程内的线程才能取得消息。在微服务中，业务被分布在多个服务之间，所以我们使用消息总线机制来实现多个微服务之间的通讯。
 ---
 ### 消息总线和消息队列

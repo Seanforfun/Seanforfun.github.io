@@ -4,6 +4,7 @@ title:  "Chain of Responsibility 责任链模式"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DesignPattern
+comment: true
 description: 使多个对象都有机会处理同一个请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它为止。
 ---
 # Chain of Responsibility 责任链模式

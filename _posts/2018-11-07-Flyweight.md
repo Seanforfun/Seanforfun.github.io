@@ -4,6 +4,7 @@ title:  "Flyweight Pattern 享元模式"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DesignPattern
+comment: true
 description: 享元模式的主要目的是实现对象的共享，即共享池，当系统中对象多的时候可以减少内存的开销，通常与工厂模式一起使用。采用一个共享来避免大量拥有相同内容对象的开销。这种开销中最常见、直观的就是内存的损耗。享元模式以共享的方式高效的支持大量的细粒度对象。共享的对象必须是不可变的，不然一变则全变（如果有这种需求除外）。
 ---
 # Flyweight Pattern 享元模式

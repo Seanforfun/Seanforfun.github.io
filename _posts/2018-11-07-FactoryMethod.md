@@ -4,6 +4,7 @@ title:  "Factory Method"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DesignPattern
+comment: true
 description: 介绍了简单工厂模式。
 ---
 # Factory Method
@@ -35,7 +36,7 @@ public interface Sender {
 		}
 	}
 	```
-	
+
 	* 定义一个SMSSender实现类
 	```Java
 	public class SMSSender implements Sender {

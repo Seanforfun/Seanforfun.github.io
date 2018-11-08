@@ -4,6 +4,7 @@ title:  "Decorator Pattern 装饰者模式"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DesignPattern
+comment: true
 description: 装饰模式就是给一个对象增加一些新的功能，而且是动态的，要求装饰对象和被装饰对象实现同一个接口，装饰对象持有被装饰对象的实例.通过装饰者模式对方法进行增强，通过对实例方法的调用，可以在调用之前或是之后实现增强，实现AOP。
 ---
 # Decorator Pattern 装饰者模式

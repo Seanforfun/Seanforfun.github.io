@@ -4,6 +4,7 @@ title:  "JVM ClassLoader"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: JVM Concurrent
+comment: true
 description: JVM层面的类加载器。
 ---
 ### Class类文件结构
