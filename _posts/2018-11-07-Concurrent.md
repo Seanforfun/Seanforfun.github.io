@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Concurrent"
+title:  "Concurrent on JMM"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
-categories: JVM Concurrent
+categories: JVM Concurrency
 comment: true
 description: JVM层面的并发解析。
 ---

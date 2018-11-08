@@ -3,7 +3,7 @@ layout: post
 title:  "volatile, Szychronized关键字"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
-categories: JavaCore Concurrent
+categories: JavaCore Concurrency
 comment: true
 description: volatile和szychronized关键字均Java中用于多线程并发。在初期学习这两个关键字的时候已经写了一些总结，可以参见[MultiThreadAndLock v1.0](https://github.com/Seanforfun/JavaCore/blob/master/Conclusions/MultiThreadAndLock.txt)， 但是几乎时隔一年，我再次翻阅这部分的内容，发现总结的部分多有疏漏，一些概念还是发生了混淆所以在本文中将会着重指出自己的一些疏漏并且加以梳理。
 ---

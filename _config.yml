@@ -10,12 +10,12 @@ exclude:
 
 # Site settings
 title: Seanforfun
-subtitle: "A simple technology blog."
+subtitle: "Just a Techblog."
 email: xiaob6@mcmaster.ca
 name: Botao Xiao
 description: >
   Welcome to Seanforfun technical blog.
-  This blog is powered by centrarium,Please star it if you like.
+  This blog is powered by centrarium, please star it if you like.
 # Base URL of site (i.e. /blog). It should always start with a slash,
 # and never end with a slash. Set it to a blank value if hosting at the
 # root of your server.
@@ -26,7 +26,7 @@ logo: "/assets/logo.png"
 
 # Build settings
 markdown: kramdown
-paginate: 5
+paginate: 10
 paginate_path: "/page:num/"
 inter_post_navigation: false
 highlightjs_theme: "monokai-sublime"
@@ -76,14 +76,7 @@ social:
 #    username: TheBenCentra
 #    url: https://twitter.com/TheBenCentra
 #    desc: Follow me on Twitter
-#    share: true
-
-  - name: Facebook
-    icon: facebook
-    username: Botao Xiao
-    url:
-    desc: Friend me on Facebook
-    share: true
+#    share: true  
 
   - name: GitHub
     icon: github
@@ -97,6 +90,13 @@ social:
     username: Botao Xiao
     url: https://www.linkedin.com/in/botao-xiao-03304b167/
     desc: Connect with me on LinkedIn
+    share: true  
+   
+  - name: Facebook
+    icon: facebook
+    username: Botao Xiao
+    url: https://www.facebook.com/botao.xiao.5
+    desc: Friend me on Facebook
     share: true
 
   - name: Google+
@@ -194,6 +194,6 @@ protocols:
 
     twitter_image: "/assets/logo.png"
 
-#    os_repo: "https://github.com/bencentra/centrarium.com"
-#    os_rcs_type: "git"
-#    os_src: "git@github.com:bencentra/centrarium.com.git"
+    os_repo: "https://github.com/Seanforfun/Seanforfun.github.io"
+    os_rcs_type: "git"
+    os_src: "https://github.com/Seanforfun/Seanforfun.github.io.git"
