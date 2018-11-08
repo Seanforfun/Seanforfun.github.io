@@ -1,7 +1,7 @@
 # External gems
 # See http://ixti.net/software/2013/01/28/using-jekyll-plugins-on-github-pages.html for making `jekyll archives` work.
 gems:
-#  - jekyll-archives # Sorry, not GitHub pages friendly!
+  #- jekyll-archives # Sorry, not GitHub pages friendly!
   - jekyll-sitemap
   - jekyll-paginate
   
@@ -80,7 +80,7 @@ social:
 
   - name: Facebook
     icon: facebook
-    username: thebencentra
+    username: Botao Xiao
     url:
     desc: Friend me on Facebook
     share: true
