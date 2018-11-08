@@ -1,0 +1,63 @@
+---
+layout: post
+title:  "Listener"
+date:   2018-11-07 20:04:59
+author: Botao Xiao
+categories: JavaBackend
+description: 服务器上需要一些程序，常常是根据用户输入访问数据库的程序。这些通常是使用公共网关接口（Common Gateway Interface，CGI）应用程序完成的。然而，在服务器上运行 Java，这种程序可使用 Java 编程语言实现。在通信量大的服务器上，JavaServlet 的优点在于它们的执行速度更快于 CGI 程序。各个用户请求被激活成单个程序中的一个线程，而无需创建单独的进程，这意味着服务器端处理请求的系统开销将明显降低。
+---
+## Servlet
+
+### Servlet的优势
+服务器上需要一些程序，常常是根据用户输入访问数据库的程序。这些通常是使用公共网关接口（Common Gateway Interface，CGI）应用程序完成的。然而，在服务器上运行 Java，这种程序可使用 Java 编程语言实现。在通信量大的服务器上，JavaServlet 的优点在于它们的执行速度更快于 CGI 程序。各个用户请求被激活成单个程序中的一个线程，而无需创建单独的进程，这意味着服务器端处理请求的系统开销将明显降低。
+
+### 实现过程
+![Servlet宏观的实现过程](https://i.imgur.com/AsLFdLG.jpg)
+1. 服务端发送请求到服务器端。
+2. 服务器端将请求解析，并通过解析的内容装配成Servlet对象。
+3. 服务器根据Servlet对象进行响应。
+4. 服务器将响应返回给客户端。
+
+### 生命周期
+1. 调用init方法，加载配置环境，生成request, response对象。
+2. 调用service方法，会解析http报文，判断method方法，调用内部的doPost,doGet...等方法。执行具体的业务。
+3. 调用destroy方法，释放资源，完成生命周期。
+
+#### 步骤
+![Servlet生命周期](https://i.imgur.com/3Ob8Xk4.png)
+1. Web Client向Servlet容器(tomcat)发出Http请求
+2. Servlet容器接收Web Client的请求
+3. Servlet容器创建一个HttpRequest对象，将Web Client请求的信息封装到这个对象中。
+4. Servlet容器创建一个HttpResponse对象
+5. Servlet容器调用HttpServlet对象的service方法，把HttpRequest对象与HttpResponse对象作为参数传递给HttpServlet对象。
+6. HttpServlet调用HttpRequest对象的有关方法，获取Http请求信息
+7. HttpServlet调用HttpResponse对象的有关方法，生成响应数据
+8. Servlet容器把HttpServlet的响应结果传入Web Client。
+
+### Servlet的配置
+* 通过xml配置
+
+```xml
+  <servlet>
+  	<!-- 定义servlet的名字，并指向了该servlet对应的是哪个类，servlet容器会通过反射生成一个servlet的实例对象, 通过load-on-startup定义加载顺序。 -->
+    <servlet-name>ServletDemo1</servlet-name>
+    <servlet-class>gacl.servlet.study.ServletDemo1</servlet-class>
+	<load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ServletDemo1</servlet-name>
+	<!-- 配置url和servlet实例的映射。 -->
+    <url-pattern>/servlet/ServletDemo1</url-pattern>
+  </servlet-mapping>
+```
+
+* 通过注解配置
+
+```Java
+ @WebServlet(description = "a enter for wechat", urlPatterns = { "/aaa"},loadOnStartup=1)
+```
+
+### Reference
+1. [servlet](https://baike.baidu.com/item/servlet/477555?fr=aladdinhttps://baike.baidu.com/item/servlet/477555?fr=aladdin)
+2. [Servlet的生命周期和工作原理](https://blog.csdn.net/a3060858469/article/details/78120527)
