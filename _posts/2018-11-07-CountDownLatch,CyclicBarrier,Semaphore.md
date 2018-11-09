@@ -7,10 +7,11 @@ categories: Concurrent
 comment: true
 description: 这三个类都是concurrent包的辅助类，用于帮助我们确定线程并发的安全性。
 ---
-这三个类都是concurrent包的辅助类，用于帮助我们确定线程并发的安全性。
+这三个类都是concurrent包的辅助类，用于帮助我们确定线程并发的安全性。均实现了AQS(Abstract Queued Synchronizer)接口，适用于线程同步的工具。
 
 ### CountDownLatch
-CountDownLatch类位于java.util.concurrent包下，利用它可以实现类似计数器的功能。比如有一个任务A，它要等待其他4个任务执行完毕之后才能执行，此时就可以利用CountDownLatch来实现这种功能了。
+![Imgur](https://i.imgur.com/tujncqX.png)
+CountDownLatch类位于java.util.concurrent包下，利用它可以实现类似计数器的功能。比如有一个任务A，它要等待其他4个任务执行完毕之后才能执行，此时就可以利用CountDownLatch来实现这种功能，指的是线程等待外部的一个状态。
 * CountDownLatch的定义
 这个类只有一个构造器，定义一个初始值，并且从这个值开始往下计数。
 ```Java
@@ -61,7 +62,7 @@ public class CountDownLatchConclusion {
 ```
 
 ### CyclicBarrier
-字面意思回环栅栏，通过它可以实现让一组线程等待至某个状态之后再全部同时执行。叫做回环是因为当所有等待线程都被释放以后，CyclicBarrier可以被重用。我们暂且把这个状态就叫做barrier，当调用await()方法之后，线程就处于barrier了。
+字面意思回环栅栏，通过它可以实现让一组线程等待至某个状态之后再全部同时执行，是线程之间的相互等待。叫做回环是因为当所有等待线程都被释放以后，CyclicBarrier可以被重用。我们暂且把这个状态就叫做barrier，当调用await()方法之后，线程就处于barrier了。
 
 * CyclicBarrier的创建
 ```Java
@@ -232,6 +233,49 @@ Worker-1 released the resource.
 Worker-5 released the resource.
 Worker-6 released the resource.
 Worker-7 released the resource.
+```
+
+#### 尝试获取信号量,如果无法获取则会丢去所有的阻塞的线程。
+```Java
+@Slf4j
+public class TestSemaphore {
+    private static final int TASK_NUM = 100;
+    private static final int THREAD_NUM = 10;
+
+    public static void main(String[] args) throws InterruptedException {
+        Semaphore semaphore = new Semaphore(THREAD_NUM);
+        CountDownLatch latch = new CountDownLatch(TASK_NUM);
+        ExecutorService executors = Executors.newCachedThreadPool();
+        for (int i = 0; i < TASK_NUM; i++){
+            final int count =  i;
+            executors.execute(() -> {
+                try {
+                    if (semaphore.tryAcquire(2)){
+                        log(count);
+                        semaphore.release(2);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    latch.countDown();
+                }
+            });
+        }
+        latch.await();
+        log.info("finish");
+        executors.shutdown();
+    }
+    public static void log(int i) throws InterruptedException {
+        log.info("{}", i);
+        Thread.sleep(1000);
+    }
+}
+19:35:03.560 [pool-1-thread-4] INFO ca.mcmaster.concurrent.TestSemaphore - 3
+19:35:03.560 [pool-1-thread-6] INFO ca.mcmaster.concurrent.TestSemaphore - 5
+19:35:03.560 [pool-1-thread-2] INFO ca.mcmaster.concurrent.TestSemaphore - 1
+19:35:03.560 [pool-1-thread-1] INFO ca.mcmaster.concurrent.TestSemaphore - 0
+19:35:03.560 [pool-1-thread-5] INFO ca.mcmaster.concurrent.TestSemaphore - 4
+19:35:04.564 [main] INFO ca.mcmaster.concurrent.TestSemaphore - finish
 ```
 
 ### Conclusion
