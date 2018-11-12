@@ -38,13 +38,9 @@ description: 在我的第一次接触到C的时候就已经开始了对锁的研
     
     3. 作用在对象上，分为三种情况，作用于类，当前实例和某个对象实例。实际上都是将某个对象当做锁在使用1中是将实例锁当做锁(synchronized(this))，2是将类锁当做锁（synchronize(Test.class)），如果我们传入一个任意的实例，我们就是将该实例传入当做锁。
     ```Java
-    /**
-     * 实际上我们使用string作为一个锁，即使当前对象和锁毫无关系。
-     */
+    // 实际上我们使用string作为一个锁，即使当前对象和锁毫无关系。     
     public synchronized static void add() {
-        /**
-         * 此处string已经作为锁在使用了。
-         */
+        //此处string已经作为锁在使用了。
         synchronized (string){
             System.out.println(count++);
         }
