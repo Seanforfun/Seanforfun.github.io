@@ -13,7 +13,7 @@ permalink: /task/
 - [x] Merge my conclusions of Algorithm and data structure to this website.
 - [ ] Write first 100 leetcode problems twice.
 - [ ] Write a page for listing my achievements in deep learning field.
-- [ ] Watch the series of Java high concurrency on Youtube.
+- [x] Watch the series of Java high concurrency on Youtube.
 - [ ] Read the book 《精通Spring 4.x 企业应用开发实战》, read source code of Spring.
 - [ ] Read a book about Spring MVC, review my projects for Spring MVC.
 - [ ] Read a book of Springboot, write a conclusion paper and open a new column.
