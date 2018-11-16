@@ -219,7 +219,6 @@ System.out.println(usPattern);	//At 9:59 AM On July 19, 2018, Sean saved $1,000,
 
 3. 通过ResourceBundle实现国际化
 * 在项目中定义国际化的properties文件，该文件的文件名有一定的规范：<资源名>_<语言名>.properties， 例如greeting_en_CA.properties和greeting_zh_CN.properties。
-
 * 在代码中调用
 ```Java
 ResourceBundle enBundle = ResourceBundle.getBundle("ca/mcmaster/spring/i18n/greeting", Locale.CANADA);	//前一个参数写出了全路径名（最后一个位置为资源名），第二个参数是国际化的信息。
@@ -233,11 +232,9 @@ Hello!
 
 4. 资源文件中使用格式化串
 * 在资源文件中定义语句串
-```
-greeting.common=Hello {0}! Today is {1}!
-```
 * 在Java文件中获取语句串并赋值
 ```Java
+greeting.common=Hello {0}! Today is {1}!
 ResourceBundle fmtBundle = ResourceBundle.getBundle("ca/mcmaster/spring/i18n/fmt_greeting", Locale.CANADA);
 MessageFormat msgFormat = new MessageFormat(fmtBundle.getString("greeting.common"), Locale.CANADA);
 Object[] params = {"Sean", new GregorianCalendar().getTime()};
@@ -247,7 +244,9 @@ Hello Sean! Today is 19/07/18 10:34 AM!
 ```
 
 5. 利用Spring来获取ResourceBundle信息
-```xml
+	* 可以通过ReloadableResourceBundleMessageSource来设置cacheSeconds使框架会刷新resource文件。
+
+```Xml
 <bean id="myResource" class="org.springframework.context.support.ResourceBundleMessageSource">
 	<property name="basenames">
 		<list>
@@ -256,8 +255,6 @@ Hello Sean! Today is 19/07/18 10:34 AM!
     </property>
 </bean>
 ```
-
-* 可以通过ReloadableResourceBundleMessageSource来设置cacheSeconds使框架会刷新resource文件。
 
 ### 容器事件
 > Spring的ApplicationContext能够发布事件并且允许注册相应的事件监听器，它拥有一套完善的事件发布和监听机制。
