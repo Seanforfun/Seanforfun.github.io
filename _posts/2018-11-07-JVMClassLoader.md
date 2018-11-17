@@ -3,7 +3,7 @@ layout: post
 title:  "JVM ClassLoader"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
-categories: JVM Concurrent
+categories: JVM
 comment: true
 description: JVM层面的类加载器。
 ---

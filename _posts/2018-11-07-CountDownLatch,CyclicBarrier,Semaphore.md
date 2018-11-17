@@ -3,7 +3,7 @@ layout: post
 title:  "CountDownLatch,CyclicBarrier,Semaphore"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
-categories: Concurrent
+categories: Concurrency
 comment: true
 description: 这三个类都是concurrent包的辅助类，用于帮助我们确定线程并发的安全性。
 ---
