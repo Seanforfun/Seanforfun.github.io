@@ -119,7 +119,27 @@ ServletContext getServletContext();
 13. 如果当前bean是单例模式，会将该单例加入Spring缓存池。Spring将会对Bean后续生命周期进行管理。
 14. 【可选】在销毁对象之前，如果注册了org.springframework.beans.factory.DisposableBean#destroy方法，可以在这个方法中释放资源。
 
+### 对bean的生命周期的利用
+| Aware interface | Method to override | Purpose |
+| :------ | :------ | :------ |
+|ApplicationContextAware | void setApplicationContext (ApplicationContext applicationContext) throws BeansException; | Interface to be implemented by any object that wishes to be notified of the ApplicationContext that it runs in.
+|ApplicationEventPublisherAware | void setApplicationEventPublisher (ApplicationEventPublisher applicationEventPublisher); | Set the ApplicationEventPublisher that this object runs in.
+|BeanClassLoaderAware | void setBeanClassLoader (ClassLoader classLoader); | Callback that supplies the bean class loader to a bean instance.
+|BeanFactoryAware | void setBeanFactory (BeanFactory beanFactory) throws BeansException; | Callback that supplies the owning factory to a bean instance.
+|BeanNameAware | void setBeanName(String name); | Set the name of the bean in the bean factory that created this bean.
+|BootstrapContextAware | void setBootstrapContext (BootstrapContext bootstrapContext); | Set the BootstrapContext that this object runs in.
+|LoadTimeWeaverAware | void setLoadTimeWeaver (LoadTimeWeaver loadTimeWeaver); | Set the LoadTimeWeaver of this object’s containing ApplicationContext.
+|MessageSourceAware | void setMessageSource (MessageSource messageSource); | Set the MessageSource that this object runs in.
+|NotificationPublisherAware | void setNotificationPublisher (NotificationPublisher notificationPublisher); | Set the NotificationPublisher instance for the current managed resource instance.
+|PortletConfigAware | void setPortletConfig (PortletConfig portletConfig); | Set the PortletConfig this object runs in.
+|PortletContextAware | void setPortletContext (PortletContext portletContext); | Set the PortletContext that this object runs in.
+|ResourceLoaderAware | void setResourceLoader (ResourceLoader resourceLoader); | Set the ResourceLoader that this object runs in.
+|ServletConfigAware | void setServletConfig (ServletConfig servletConfig); | Set the ServletConfig that this object runs in.
+|ServletContextAware | void setServletContext (ServletContext servletContext); | Set the ServletContext that this object runs in.
 
+
+### Reference
+1. [Spring Bean Life Cycle Explained](https://howtodoinjava.com/spring-core/spring-bean-life-cycle/)
 
 
 
