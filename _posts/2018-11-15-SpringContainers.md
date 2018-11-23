@@ -137,6 +137,61 @@ ServletContext getServletContext();
 |ServletConfigAware | void setServletConfig (ServletConfig servletConfig); | Set the ServletConfig that this object runs in.
 |ServletContextAware | void setServletContext (ServletContext servletContext); | Set the ServletContext that this object runs in.
 
+### ApplicationContext的装配过程
+我们通过分析AbstractApplicationContext对象的refresh方法来研究在context被加载完以后bean的装配过程。使用了建造者模式。
+```Java
+@Override
+public void refresh() throws BeansException, IllegalStateException {
+	synchronized (this.startupShutdownMonitor) {
+		// Prepare this context for refreshing.
+		prepareRefresh();
+		// Tell the subclass to refresh the internal bean factory.
+		// 1. 初始化BeanFactory
+		ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
+		// Prepare the bean factory for use in this context.
+		prepareBeanFactory(beanFactory);
+		try {
+			// Allows post-processing of the bean factory in context subclasses.
+			postProcessBeanFactory(beanFactory);
+			// Invoke factory processors registered as beans in the context.
+			// 2. 调用工厂后处理器
+			invokeBeanFactoryPostProcessors(beanFactory);
+			// Register bean processors that intercept bean creation.
+			registerBeanPostProcessors(beanFactory);
+			// Initialize message source for this context.
+			initMessageSource();
+			// Initialize event multicaster for this context.
+			initApplicationEventMulticaster();
+			// Initialize other special beans in specific context subclasses.
+			onRefresh();
+			// Check for listener beans and register them.
+			registerListeners();
+			// Instantiate all remaining (non-lazy-init) singletons.
+			finishBeanFactoryInitialization(beanFactory);
+			// Last step: publish corresponding event.
+			finishRefresh();
+		}
+		catch (BeansException ex) {
+			if (logger.isWarnEnabled()) {
+				logger.warn("Exception encountered during context initialization - " +
+						"cancelling refresh attempt: " + ex);
+			}
+			// Destroy already created singletons to avoid dangling resources.
+			destroyBeans();
+			// Reset 'active' flag.
+			cancelRefresh(ex);
+			// Propagate exception to caller.
+			throw ex;
+		}
+		finally {
+			// Reset common introspection caches in Spring's core, since we
+			// might not ever need metadata for singleton beans anymore...
+			resetCommonCaches();
+		}
+	}
+}
+```
+1. 初始化BeanFactory: 初始化BeanFactory的方法分成两种。第一步refreshBeanFactory();根据配置文件实例化BeanFactory。第二步调用getBeanFactory()方法获取beanFactory对象。
 
 ### Reference
 1. [Spring Bean Life Cycle Explained](https://howtodoinjava.com/spring-core/spring-bean-life-cycle/)
