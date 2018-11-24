@@ -29,4 +29,69 @@ private Comparator<Apple> comparator =
 ### Lambda的使用位置
 在函数式接口（一个只定义一个抽象方法的接口）上使用抽象方法。Lambda表达式允许直接以内联的形式为函数式接口的抽象方法提供实现，并把整个表达式作为函数式接口的实例。
 
-To Be continued.
+### Lambda表达式的实现
+1. 行为参数化：所谓的行为参数化是一种策略模式的体现。将一个函数式接口作为一种行为作为参数传递给另一个方法。此时p就是一种行为，对于文件的处理是不固定的，根据接口的实现类而定。典型的策略模式。当前例子中体现在参数FileReaderProcessor p。
+```Java
+public static String processFile(String file, FileReaderProcessor p) throws IOException {
+    File f = new File(file);
+    try(BufferedReader br = new BufferedReader(new FileReader(f))) {
+        return p.process(br);
+    }
+}
+```
+
+2. 使用函数式接口传递行为。@FunctionalInterface,该接口中只有一个抽象方法。
+```Java
+@FunctionalInterface
+public interface FileReaderProcessor {
+    String process(BufferedReader br) throws IOException;
+}
+```
+
+3. 执行行为。此时的行为是不确定的，需要传入策略。
+```Java
+return p.process(br);
+```
+
+4. 传递Lambda。此处的lambda充当接口的实现类。
+```Java
+public static void main(String[] args) throws IOException {
+    System.out.println(processFile("E:\\LocalProject\\Concurrent\\src\\main\\java\\ca\\mcmaster\\concurrent\\pojo\\UserInfo.java",
+            (BufferedReader br) -> {
+                return br.readLine() + br.readLine() + br.readLine();
+            }));
+}
+```
+
+### Java8中新增的函数式接口
+1. Predicate<T>:判断是否满足条件, 用于添加判断条件。
+```Java
+@FunctionalInterface
+public interface Predicate<T> {
+  /**
+   *Evaluates this predicate on the given argument.
+   *@param t the input argument
+   *@return {@code true} if the input argument matches the predicate,
+   *otherwise {@code false}
+   */
+  boolean test(T t);
+}
+```
+
+2. Consumer<T>: 其中有一个accept方法，用于对某个元素进行操作，无返回值。
+```Java
+public interface Consumer<T> {
+  /**
+   *Performs this operation on the given argument.
+   *@param t the input argument
+   */
+  void accept(T t);
+}
+// 对于每个元素而言，操作是隐藏的。
+public static <T> void processList(List<T> list, Consumer<T> c){
+    for(T t : list)
+        c.accept(t);
+}
+List<Integer> list = Arrays.asList(1,2,3,4,5,6,7,8);
+processList(list, (Integer i) -> System.out.println(i));  //实际的行为是打印每一个元素。
+```
