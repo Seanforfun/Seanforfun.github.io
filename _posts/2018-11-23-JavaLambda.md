@@ -1,9 +1,9 @@
 ---
 layout: post
 title:  "Java8| Lambda Expression"
-date:   2018-11-22 15:38
+date:   2018-11-25 11:40
 author: Botao Xiao
-categories: Javacore
+categories: JavaCore
 description: Lambda表达式是一种简洁的表示可传递的匿名函数的一种方法：它没有名称，但是它有参数列表，函数主体，返回类型还能抛出异常列表。
 ---
 # Lambda Expression
