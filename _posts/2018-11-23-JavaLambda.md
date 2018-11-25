@@ -95,3 +95,192 @@ public static <T> void processList(List<T> list, Consumer<T> c){
 List<Integer> list = Arrays.asList(1,2,3,4,5,6,7,8);
 processList(list, (Integer i) -> System.out.println(i));  //实际的行为是打印每一个元素。
 ```
+
+3. Function<T, R>: 其中有一个apply方法，可以接受泛型参数并且定义返回值R类型。这种方法是Consumer方法的延伸，从无返回类型变成了又返回类型。
+```Java
+@FunctionalInterface
+public interface Function<T, R> {
+    /**
+     *Applies this function to the given argument.
+     *@param t the function argument
+     *@return the function result
+     */
+    R apply(T t);
+}
+public class MyFunctionInterface {
+    public static <T, R> List<R> process(List<T> list, Function<T, R> f){
+        List<R> result = new LinkedList<>();
+        for(T t : list)
+            result.add(f.apply(t));
+        return result;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> list = Arrays.asList(1,2,3,4,5,6,7,8);
+        List<Integer> result = process(list, (Integer i) -> {return i + 1;});
+        for(Integer integer : result)
+            System.out.println(integer);
+    }
+}
+```
+
+4. Supplier<T>: 提供对象的函数接口
+```Java
+@FunctionalInterface
+public interface Supplier<T> {
+    /**
+     *Gets a result.
+     *@return a result
+     */
+    T get();
+}
+public class MyFunctionInterface {
+    public static <T> List<T> createList(Supplier<T> s){
+        List<T> result = new LinkedList<>();
+        for(int i = 0; i < 10; i++){
+            result.add(s.get());
+        }
+        return result;
+    }
+    public static void main(String[] args) {
+        List<String> str = createList(() -> new String("12234"));
+        for (String ss : str)
+            System.out.println(ss);
+    }
+}
+```
+
+### 方法引用
+方法的引用允许我们重复使用现有的方法定义，并向Lambda一样传递它们。
+
+#### 构建方法的引用
+1. 指向静态方法的引用。
+![Imgur](https://i.imgur.com/jYLtX9T.png)
+2. 指向任意类型实例方法的方法引用。你在引用一个对象的方法，而这个对象本身是Lambda的一个参数。
+![Imgur](https://i.imgur.com/UNmKJ0b.png)
+3. 指向现有对象的实例方法的引用。在Lambda中引用一个已经存在的外部对象中的方法。
+![Imgur](https://i.imgur.com/Ioo89z9.png)
+
+#### 构造函数的引用
+1. 无参构造器，使用Supplier<T>的方法。
+```Java
+public class MyFunctionInterface {
+    public static <T> List<T> createList(Supplier<T> s){
+        List<T> result = new LinkedList<>();
+        for(int i = 0; i < 10; i++){
+            result.add(s.get());
+        }
+        return result;
+    }
+    public static void main(String[] args) {
+        List<String> str = createList(String::new); //引用无参构造方法
+        for (String ss : str)
+            System.out.println(ss);
+    }
+}
+```
+
+2. 引用带有参数的构造器，使用Function<T,R>函数接口
+```Java
+public static <T, R> R createObject(T t, Function<T, R> f){
+    return f.apply(t);
+}
+public static void main(String[] args) {
+    // 调用了String的带有一个参数的构造器
+    String s = createObject("Test", String::new);
+    System.out.println(s);
+}
+```
+
+3. 带有多个参数的构造器，使用BiFunction<T, U, R>函数接口。
+```Java
+public static <T, U, R> R createObject(T t, U u, BiFunction<T, U, R> f){
+    return f.apply(t, u);
+}
+public static void main(String[] args) {
+    String s = createObject("Test", String::new);
+    Apple apple = createObject(123, "Apple", Apple::new);
+    System.out.println(apple.toString());
+}
+```
+
+### 复合
+#### 比较器的复合Comparator
+1. 逆序, 使用reversed方法。
+```Java
+default Comparator<T> reversed() {
+    return Collections.reverseOrder(this);
+}
+```
+
+2. 链式比较器， thenComparing
+```Java
+default Comparator<T> thenComparing(Comparator<? super T> other) {
+    Objects.requireNonNull(other);
+    return (Comparator<T> & Serializable) (c1, c2) -> {
+        int res = compare(c1, c2);
+        return (res != 0) ? res : other.compare(c1, c2);
+    };
+}
+```
+
+#### 谓词复合 Predicate<T>
+1. 非 negate()
+```Java
+Predicate<Apple> notRedApple = redApple.negate();
+```
+
+2. 与 and()
+```Java
+Predicate<Apple> redAndHeavyApple = redApple.and(a -> a.getWeight() > 150);
+```
+
+3. 或 or()
+```Java
+Predicate<Apple> redAndHeavyAppleOrGreen = redApple.and(a -> a.getWeight() > 150).or(a -> "green".equals(a.getColor()));
+```
+
+#### 函数复合 Function<T, R>中函数使用
+1. andThen()
+```Java
+public static <T, R> R apply(T t, Function<T, R> f){
+    return f.apply(t);
+}
+public static void main(String[] args) {
+    Function<Integer, Integer> f = t -> {return t + 1;};
+    Function<Integer, Integer> g = t -> {return t * 2;};
+    Function<Integer, Integer> h = f.andThen(g);    // f(g(x))
+    Integer res = apply(1, h);
+    System.out.println(res);
+}
+```
+
+2. compose()
+```Java
+    public static <T, R> R apply(T t, Function<T, R> f){
+        return f.apply(t);
+    }
+    public static void main(String[] args) {
+        Function<Integer, Integer> f = t -> {return t + 1;};
+        Function<Integer, Integer> g = t -> {return t * 2;};
+        Function<Integer, Integer> h = f.compose(g);    // g(f(x))
+        Integer res = apply(1, h);
+        System.out.println(res);
+    }
+```
+
+### 引用
+1. [Java in Action, current link is temporary, please buy the book from legal path](https://github.com/Seanforfun/Books/blob/master/Java/Java%208%E5%AE%9E%E6%88%98.pdf)
+
+
+
+
+
+
+
+
+
+
+
+
+
