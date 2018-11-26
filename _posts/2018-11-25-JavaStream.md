@@ -113,3 +113,125 @@ menu.parallelStream()
  */
 <R> Stream<R> map(Function<? super T, ? extends R> mapper);
 ```
+
+#### 流的扁平化flatMap,实际上就是将数组中的每一个对象生成一个流，即将流扁平化。
+```Java
+    /**
+     *Returns a stream consisting of the results of replacing each element of
+     *this stream with the contents of a mapped stream produced by applying
+     *the provided mapping function to each element.  Each mapped stream is
+     *{@link java.util.stream.BaseStream#close() closed} after its contents
+     *have been placed into this stream.  (If a mapped stream is {@code null}
+     *an empty stream is used, instead.)
+     */
+    <R> Stream<R> flatMap(Function<? super T, ? extends Stream<? extends R>> mapper);
+    Example:
+    Arrays.stream(arr)  // 将字符串数组转化成流Stream<String>
+        .map(w -> w.split(""))  // 将每个字符串分解成字母，每一个字符串都分解成数组Stream<String[]>
+        .flatMap(Arrays::stream)    // 将流扁平化，每一个字符作为字符串都形成一条新的流Stream<String>
+        .distinct()
+        .forEach(System.out::println);
+```
+![Imgur](https://i.imgur.com/XraEDix.png)
+
+#### 检查谓词是否匹配一个元素anyMatch(), 终端操作。
+```Java
+/**
+ *Returns whether any elements of this stream match the provided
+ *predicate.  May not evaluate the predicate on all elements if not
+ *necessary for determining the result.  If the stream is empty then
+ *{@code false} is returned and the predicate is not evaluated.
+ */
+boolean anyMatch(Predicate<? super T> predicate);
+Exmaple:
+if(menu.stream().anyMatch(Dish::isVegetarian))
+    System.out.println("Contains vegetarian food.");
+```
+
+#### 检查谓词是否满足所有的元素allMatch(), 终端操作。
+```Java
+ /**
+ *Returns whether all elements of this stream match the provided predicate.
+ *May not evaluate the predicate on all elements if not necessary for
+ *determining the result.  If the stream is empty then {@code true} is
+ *returned and the predicate is not evaluated.
+ */
+boolean allMatch(Predicate<? super T> predicate);
+Example:
+System.out.println(menu.stream().allMatch(Dish::isVegetarian));
+```
+
+#### 完全不满足noneMatch(), 终端操作。
+```Java
+/**
+ *Returns whether no elements of this stream match the provided predicate.
+ *May not evaluate the predicate on all elements if not necessary for
+ *determining the result.  If the stream is empty then {@code true} is
+ *returned and the predicate is not evaluated.
+ */
+boolean noneMatch(Predicate<? super T> predicate);
+Example:
+System.out.println(menu.stream().noneMatch(Dish::isVegetarian));
+```
+
+#### 查找复合要求的元素
+1. findAny(), 返回一个找到的符合要求的元素。不一定是空间上的第一个。如下的返回值是6
+```Java
+List<Integer> list = Arrays.asList(1,2,3,4,5,6,7,8,9);
+list.parallelStream()
+        .filter(x -> x % 3 == 0)
+        .findAny()
+        .ifPresent(System.out::println);
+```
+
+2. findFirst(),返回第一个符合要求的元素，必定是空间上的第一个。
+```Java
+List<Integer> list = Arrays.asList(1,2,3,4,5,6,7,8,9);
+list.parallelStream()
+        .filter(x -> x % 3 == 0)
+        .findFirst()
+        .ifPresent(System.out::println);
+```
+
+#### 规约 reduce
+1. 规约将流中的所有的元素反复结合起来最后成为一个值。 reduce(int default, BiFunction bf)
+```Java
+int result = Arrays.stream(arr1)
+        .reduce(0, (a, b) -> a + b);
+System.out.println(result);
+```
+![Imgur](https://i.imgur.com/BM3FWgR.png)
+
+2. reduce(BiFunction bf): 因为没有了默认值作为基础，所以有可能得到null，此时我们将返回值设置成OptionalInt避免空指针问题。
+```Java
+        int[] arr1 = {1,2,3,4,5,6,7,8};
+        OptionalInt result = Arrays.stream(arr1)
+                .reduce((a, b) -> a + b);
+        if(result.isPresent()) System.out.println(result.getAsInt());
+```
+
+### 创建流
+1. 通过值创建流
+```Java
+Stream<Integer> stream = Stream.of(1, 2, 3, 4, 5, 6, 7, 8);
+```
+
+TO BE CONTINUED.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
