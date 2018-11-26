@@ -8,11 +8,11 @@ description: 从支持数据处理操作的源生成的元素序列。
 ---
 # Stream
 从支持数据处理操作的源生成的元素序列。
-元素序列：流提供了一个接口，可以访问特定元素类型的一组有序值。集合的目的在于以特定的时间/空间复杂度存储和访问元素，流的目的是为了计算。
-源：流会使用一个提供数据的源，如集合，数组或输入输出资源。从有序集合生成流时会保存原有的顺序。
+1. 元素序列：流提供了一个接口，可以访问特定元素类型的一组有序值。集合的目的在于以特定的时间/空间复杂度存储和访问元素，流的目的是为了计算。
+2. 源：流会使用一个提供数据的源，如集合，数组或输入输出资源。从有序集合生成流时会保存原有的顺序。
 数据处理操作：filter，map, reduce, find, match, sort等操作，都是线程安全的。
-流水线：很多流操作都会返回一个流，这样多个操作就能连接起来形成流水线。
-内部迭代：流的迭代操作是隐式的，并不像集合需要显式的迭代器。
+3. 流水线：很多流操作都会返回一个流，这样多个操作就能连接起来形成流水线。
+4. 内部迭代：流的迭代操作是隐式的，并不像集合需要显式的迭代器。
 
 ### Stream的操作
 1. filter(), 流水线中的过滤操作。接收一个Predicate对象进行filter
@@ -47,17 +47,69 @@ description: 从支持数据处理操作的源生成的元素序列。
 <R, A> R collect(Collector<? super T, A, R> collector);
 ```
 
-TO BE CONTINUED.
+### 使用流
+流的使用分成三件事：
+1. 一个数据源(如集合)：执行一个查询。
+2. 中间操作链：形成一条流水线。
+3. 一个终端操作：执行流水线，生成结果。
 
+#### 使用谓词筛选 filter()方法
+```Java
+/**
+ *Returns a stream consisting of the elements of this stream that match
+ *the given predicate.
+ *@return the new stream
+ */
+Stream<T> filter(Predicate<? super T> predicate);
+Example:
+menu.parallelStream()
+        .filter(Dish::isVegetarian)
+        .forEach(System.out::println);
+```
+![Imgur](https://i.imgur.com/O9APuMU.png)
 
+#### 筛选各异的元素 distinct()
+```Java
+/**
+   *Returns a stream consisting of the distinct elements (according to
+   *{@link Object#equals(Object)}) of this stream.
+   *@return the new stream
+   */
+  Stream<T> distinct();
+  Example：
+  list.parallelStream()
+        .distinct()
+        .forEach(System.out::println);
+```
+![Imgur](https://i.imgur.com/gftq3ce.png)
 
+#### 截断流 limit(),只会返回固定数值个元素。
+```Java
+/**
+  *Returns a stream consisting of the elements of this stream, truncated
+  *to be no longer than {@code maxSize} in length.  
+  */
+ Stream<T> limit(long maxSize);
+menu.parallelStream()
+                .filter((d) -> d.getCalories() > 300)
+                .limit(3)
+                .forEach(System.out::println);
+```
 
+#### 跳过元素, skip(n), 会跳过当前流水线中前n个元素。一般和limit结合起来使用。
+```Java
+menu.parallelStream()
+        .filter((d) -> d.getCalories() > 300)
+        .skip(2)
+        .forEach(System.out::println);
+```
 
-
-
-
-
-
-
-
-
+#### 对流中的每一个元素应用函数map()
+```Java
+/**
+ *Returns a stream consisting of the results of applying the given
+ *function to the elements of this stream.
+ *@return the new stream
+ */
+<R> Stream<R> map(Function<? super T, ? extends R> mapper);
+```
