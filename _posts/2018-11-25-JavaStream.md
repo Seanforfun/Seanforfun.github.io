@@ -216,22 +216,26 @@ System.out.println(result);
 Stream<Integer> stream = Stream.of(1, 2, 3, 4, 5, 6, 7, 8);
 ```
 
-TO BE CONTINUED.
+2. 通过数组创建流
+```Java
+int[] arr = {1,2,3,4,5,6,7,8,9};
+System.out.println(Arrays.stream(arr).sum());
+```
 
+3. 由文件生成流
+```Java
+try (Stream<String> lines = Files.lines(Paths.get("E:\\LocalProject\\Concurrent\\src\\main\\java\\ca\\mcmaster\\concurrent\\pojo\\MyReader.java"), Charset.defaultCharset())){
+            lines.map(String::length)
+                    .forEach(System.out::println);
+        }
+```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+4. 创建无限流,主要有两个静态方法iterate和generate。一般和limit结合起来使用。
+```Java
+Stream.iterate(0, n -> n + 2)
+        .limit(20)
+        .forEach(System.out::println);
+Stream.generate(Math::random)
+        .limit(100)
+        .forEach(System.out::println);
+```
