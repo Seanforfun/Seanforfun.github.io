@@ -11,6 +11,7 @@ We are using a new convolutional neural network "GMEAN" to create a End-to-end h
 ![Imgur](https://i.imgur.com/HfPpj6Q.png)
 
 ### Demonstration
+Only listed several examples, more results can be found in my [github](https://github.com/Seanforfun/Deep-Learning/tree/master/DehazeNet/Results).
 #### Outdoor
 <table>
 	<tr>
@@ -74,9 +75,9 @@ We are using a new convolutional neural network "GMEAN" to create a End-to-end h
 	</tr>	
 </table>
 
-Reference: [Generic Model-Agnostic Convolutional Neural Network for Single Image Dehazing](https://arxiv.org/abs/1810.02862)
-Code work: [GMEAN Code](https://github.com/Seanforfun/Deep-Learning/tree/master/DehazeNet)
-Co-worker: [Zheng Liu](https://github.com/MintcakeDotCom)
+1. Reference: [Generic Model-Agnostic Convolutional Neural Network for Single Image Dehazing](https://arxiv.org/abs/1810.02862)
+2. Code work: [GMEAN Code](https://github.com/Seanforfun/Deep-Learning/tree/master/DehazeNet)
+3. Co-worker: [Zheng Liu](https://github.com/MintcakeDotCom)
 
 ## Car oriented Deep image matting
 ### Introduction
