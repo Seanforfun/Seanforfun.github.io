@@ -3,9 +3,9 @@ layout: page
 title: Deep Learning
 permalink: /DeepLearning/
 ---
-Starting from January. 2018, I majorly focused on two deep learning projects, which are Haze removal and Car oriented Image matting. This page is used to demonstrate my work and results.
+Starting from January. 2018, I majorly focused on two deep learning projects from my supervisor, which are Haze removal and Car oriented Image matting. This page is used to demonstrate my work and results.
 
-## Haze removal
+## Haze removal(Jan, 2018 - June, 2018)
 ### Introduction
 We are using a new convolutional neural network "GMEAN" to create a End-to-end haze removal network. We feed the network hazed images and we can get the clear result directly. According to our results, we get the PSNR for 28.189dB and MSE for 0.964 on [RESIDES](https://sites.google.com/view/reside-dehaze-datasets/reside-%CE%B2) out door dataset.And our results on indoor evaluation dataset for PSNR and mse are 20.527dB and 0.8081 repectively.
 ![Imgur](https://i.imgur.com/HfPpj6Q.png)
@@ -79,12 +79,18 @@ Only listed several examples, more results can be found in my [github](https://g
 2. Code work: [GMEAN Code](https://github.com/Seanforfun/Deep-Learning/tree/master/DehazeNet)
 3. Co-worker: [Zheng Liu](https://github.com/MintcakeDotCom)
 
-## Car oriented Deep image matting
+## Car oriented Deep image matting (July, 2018 - Now)
 ### Introduction
 Car oriented Deep image matting is a project I worked together with CarMedia2.0 company in Burlington. The purpose of the project is we can create a matting image using the original rgb images. The projects contains two parts, one is using MaskRcnn neural network to locate the position of car in the image, the second step is create a image matting by which we can extract the car from the original RGB image.
 ![Imgur](https://i.imgur.com/1h8wd0M.png)
 
-Since the codes are now the property of the company, I cannot ditribute them right now and I will show some demos.
+* Step 1: [MASK-RCNN](https://arxiv.org/pdf/1703.06870.pdf) from Facebook AI group
+![Imgur](https://i.imgur.com/4hOnfrJ.png)
+
+* sTEP 2: [Deep Image Matting](https://arxiv.org/pdf/1703.03872.pdf) from Adobe research group
+![Imgur](https://i.imgur.com/lPmd2QJ.png)
+
+Since the codes are now the property of the company, I cannot ditribute them right now and I will show some demos. Improvement is easily to be achieved by some future work, however my research must be stopped by some reasons.
  
 ### Demonstration
 <table>
@@ -107,6 +113,11 @@ Since the codes are now the property of the company, I cannot ditribute them rig
 		<th><img src="https://i.imgur.com/o8dZuh7.png"/></th>		
 		<th><img src="https://i.imgur.com/SJb4oTI.png"/></th>
 		<th><img src="https://i.imgur.com/cNaFwB5.png"/></th>
+	</tr>
+	<tr>
+		<th><img src="https://i.imgur.com/Hjgy4Ey.png"/></th>		
+		<th><img src="https://i.imgur.com/4ZkOAdB.png"/></th>
+		<th><img src="https://i.imgur.com/Vp0Je1W.png"/></th>
 	</tr>
 </table>
 
