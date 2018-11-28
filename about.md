@@ -14,4 +14,3 @@ permalink: /about/
 <p>Meanwhile, I am also responsible for some deep learning coding using Tensorflow. You can go to the <a href="https://seanforfun.github.io/DeepLearning/">Deep Learning</a> link for more information. I finished 2 projects in 2018, which are Haze removal and Car oriented image matting. The code for <a href="https://github.com/Seanforfun/Deep-Learning/tree/master/DehazeNet">Haze Removal</a> is open sourced and can be used on non-commercial purpose. The car oriented image matting project belongs to company Car media 2.0 now and cannot be open sourced, however, discussions are welcomed.
 
 <p>Thank you for reading! And enjoy!</p>
-</div>
