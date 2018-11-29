@@ -239,3 +239,134 @@ Stream.generate(Math::random)
         .limit(100)
         .forEach(System.out::println);
 ```
+
+### 使用流收集数据
+#### 规约和汇总
+1. 获得流中数据的个数
+```Java
+Long number = menu.parallelStream().collect(Collectors.counting());
+System.out.println(number);
+Long number1 = menu.parallelStream().count();
+System.out.println(number1);
+```
+
+2. 查找流中的最大值和最小值
+```Java
+// Max
+Optional<Dish> max = menu.parallelStream().max((d1, d2) -> d1.getCalories() - d2.getCalories());
+Optional<Dish> max1 = menu.parallelStream().collect(Collectors.maxBy((d1, d2) -> d1.getCalories() - d2.getCalories()));
+if(max.isPresent()) System.out.println(max.get());
+if(max1.isPresent()) System.out.println(max1.get());
+// Min
+Optional<Dish> max = menu.parallelStream().min((d1, d2) -> d1.getCalories() - d2.getCalories());
+Optional<Dish> max1 = menu.parallelStream().collect(Collectors.minBy((d1, d2) -> d1.getCalories() - d2.getCalories()));
+if(max.isPresent()) System.out.println(max.get());
+if(max1.isPresent()) System.out.println(max1.get());
+```
+
+3. 汇总，将流中的某个域进行汇总
+```Java
+// 计算总和
+Integer collect = menu.parallelStream().collect(Collectors.summingInt(Dish::getCalories));
+System.out.println(collect);
+// 计算平均值
+Double collect = menu.parallelStream().collect(Collectors.averagingInt(Dish::getCalories));
+System.out.println(collect);
+```
+![Imgur](https://i.imgur.com/jDimSZu.png)
+
+4. 连接字符串, 首先要确保当前的流已经被映射到了一个字符串流上。
+```Java
+String collect = menu.parallelStream().map(Dish::getName).collect(Collectors.joining());
+System.out.println(collect);
+```
+
+#### 广义的规约和汇总， 使用collect和reducing
+```Java
+    /**
+     *Returns a {@code Collector} which performs a reduction of its
+     *input elements under a specified mapping function and
+     *{@code BinaryOperator}. This is a generalization of
+     *{@link #reducing(Object, BinaryOperator)} which allows a transformation
+     *of the elements before reduction.
+     *@param identity the identity value for the reduction (also, the value that is returned when there are no input elements)
+     *@param mapper a mapping function to apply to each input value
+     *@param op a {@code BinaryOperator<U>} used to reduce the mapped values
+    public static <T, U> Collector<T, ?, U> reducing(U identity,
+                                Function<? super T, ? extends U> mapper,
+                                BinaryOperator<U> op) {
+        return new CollectorImpl<>(
+                boxSupplier(identity),
+                (a, t) -> { a[0] = op.apply(a[0], mapper.apply(t)); },
+                (a, b) -> { a[0] = op.apply(a[0], b[0]); return a; },
+                a -> a[0], CH_NOID);
+    }
+    Example:
+    Integer sumCalories = menu.parallelStream().collect(Collectors.reducing(0, Dish::getCalories, (n1, n2) -> n1 + n2));
+    System.out.println(sumCalories);
+```
+* 上一个chapter中所有提及的规约方式均可以通过reducing实现，我们可以通过Function<U, R>来实现mapping， 而我们使用BiFunction来实现我们的规约操作。
+* 实现的方法更多了，但是可读性变差了。
+![Imgur](https://i.imgur.com/DzUpZFH.png)
+
+#### 分组
+分组的返回值是一个Map，对于每一个项目，键是我们定义的classifier，而值是符合这个键的对象的列表。
+```Java
+Map<Type, List<Dish>> map = menu.stream().collect(Collectors.groupingBy(Dish::getType));
+System.out.println(map.toString());
+```
+![Imgur](https://i.imgur.com/u21zx0w.png)
+
+1. 我们自己手动扩充分组函数
+```Java
+Map<caloriesType, List<Dish>> collect = menu.stream().collect(Collectors.groupingBy(dish -> {
+    if (dish.getCalories() >= 700) return caloriesType.HIGH;
+    else if (dish.getCalories() <= 400) return caloriesType.LOW;
+    else return caloriesType.MEDIUM;
+}));
+System.out.println(collect.toString());
+```
+
+2. 多级分组
+```Java
+Map<Type, Map<caloriesType, List<Dish>>> collect = menu.stream().collect(Collectors.groupingBy(Dish::getType, Collectors.groupingBy(dish -> {
+    if (dish.getCalories() >= 700) return caloriesType.HIGH;
+    else if (dish.getCalories() <= 400) return caloriesType.LOW;
+    else return caloriesType.MEDIUM;
+})));
+System.out.println(collect.toString());
+```
+
+3. 将收集器的结果转换成另一种类型
+```Java
+Map<Type, Dish> collect = menu.stream().collect(Collectors.groupingBy(Dish::getType,
+        Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparing(Dish::getCalories)),
+                Optional::get)));
+System.out.println(collect);
+```
+
+#### 分区
+分区的好处在于保留了分区函数返回true和false的两套流元素。
+```Java
+Map<Boolean, Map<Type, List<Dish>>> collect = menu.stream().
+        collect(Collectors.partitioningBy(Dish::isVegetarian,
+                Collectors.groupingBy(Dish::getType)));
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
