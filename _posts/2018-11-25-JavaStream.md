@@ -353,8 +353,78 @@ Map<Boolean, Map<Type, List<Dish>>> collect = menu.stream().
                 Collectors.groupingBy(Dish::getType)));
 ```
 
+### Collector接口分析
+```Java
+public interface Collector<T, A, R> {
+    /**
+     *A function that creates and returns a new mutable result container.
+     *@return a function which returns a new, mutable result container
+     */
+    Supplier<A> supplier();
+    /**
+     *A function that folds a value into a mutable result container.
+     *@return a function which folds a value into a mutable result container
+     */
+    BiConsumer<A, T> accumulator();
+    /**
+     *A function that accepts two partial results and merges them.  The
+     *combiner function may fold state from one argument into the other and
+     *return that, or may return a new result container.
+     *@return a function which combines two partial results into a combined
+     *result
+     */
+    BinaryOperator<A> combiner();
+    /**
+     *Perform the final transformation from the intermediate accumulation type
+     *{@code A} to the final result type {@code R}.
+     *<p>If the characteristic {@code IDENTITY_TRANSFORM} is
+     *set, this function may be presumed to be an identity transform with an
+     *unchecked cast from {@code A} to {@code R}.
+     *@return a function which transforms the intermediate result to the final
+     *result
+     */
+    Function<A, R> finisher();
+    /**
+     *Returns a {@code Set} of {@code Collector.Characteristics} indicating
+     *the characteristics of this Collector.  This set should be immutable.
+     *@return an immutable set of collector characteristics
+     */
+    Set<Characteristics> characteristics();
+}
+```
+1. supplier: 返回一个空的容器。
+2. accumulator：将一个元素添加到容器之中。
+3. combiner：将两个容器合并。
+![Imgur](https://i.imgur.com/rOpRfA9.png)
+4. finisher: 对结果容器应用的最终转换。
+5. characteristics：对流进行定义。
+![Imgur](https://i.imgur.com/YItpxLr.png)
 
-
+#### 实现自己的ToListCollector
+```Java
+public class ToListCollector <T>  implements Collector<T, List<T>, List<T>> {
+    @Override
+    public Supplier<List<T>> supplier() {
+        return LinkedList::new;
+    }
+    @Override
+    public BiConsumer<List<T>, T> accumulator() {
+        return (list, n) -> list.add(n);
+    }
+    @Override
+    public BinaryOperator<List<T>> combiner() {
+        return (l1, l2) -> {l1.addAll(l2)};
+    }
+    @Override
+    public Function<List<T>, List<T>> finisher() {
+        return Function.identity();
+    }
+    @Override
+    public Set<Characteristics> characteristics() {
+        return Collections.unmodifiableSet(EnumSet.of(Characteristics.IDENTITY_FINISH, Characteristics.CONCURRENT));
+    }
+}
+```
 
 
 
