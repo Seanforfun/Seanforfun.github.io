@@ -9,7 +9,7 @@ permalink: /task/
 	There are so many things to do but nothing will be finished without plans. Here I listed some tasks I want to do and cross them after I finished them.
 </div>
 
-- [ ] Terminate the alphamatting project.
+- [x] Terminate the alphamatting project.
 - [x] Merge my conclusions of Algorithm and data structure to this website.
 - [x] Write first 100 leetcode problems twice.
 - [x] Write a page for listing my achievements in deep learning field.
