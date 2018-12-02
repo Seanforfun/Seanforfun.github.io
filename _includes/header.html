@@ -12,8 +12,28 @@
     </a>
     <nav role="navigation">
       <ul id="js-navigation-menu" class="navigation-menu show">
-        {% for page in site.pages %}
-          {% if page.title and page.main_nav != false %}		  
+        {% for page in site.pages %}		  
+          {% if page.title == "About Me" and page.main_nav != false %}		  
+          <li class="nav-link"><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+          {% endif %}
+        {% endfor %}
+		{% for page in site.pages %}		  
+          {% if page.title == "Posts" and page.main_nav != false %}		  
+          <li class="nav-link"><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+          {% endif %}
+        {% endfor %}
+		{% for page in site.pages %}		  
+          {% if page.title == "LeetCode" and page.main_nav != false %}		  
+          <li class="nav-link"><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+          {% endif %}
+        {% endfor %}
+		{% for page in site.pages %}		  
+          {% if page.title == "Deep Learning" and page.main_nav != false %}		  
+          <li class="nav-link"><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+          {% endif %}
+        {% endfor %}
+		{% for page in site.pages %}		  
+          {% if page.title == "Checklist" and page.main_nav != false %}		  
           <li class="nav-link"><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
           {% endif %}
         {% endfor %}
