@@ -8,10 +8,11 @@ Starting from January. 2018, I majorly focused on two deep learning projects fro
 ## Haze removal(Jan, 2018 - June, 2018)
 ### Introduction
 We are using a new convolutional neural network "GMEAN" to create a End-to-end haze removal network. We feed the network hazed images and we can get the clear result directly. According to our results, we get the PSNR for 28.189dB and MSE for 0.964 on [RESIDES](https://sites.google.com/view/reside-dehaze-datasets/reside-%CE%B2) out door dataset.And our results on indoor evaluation dataset for PSNR and mse are 20.527dB and 0.8081 repectively.
+
 ![Imgur](https://i.imgur.com/HfPpj6Q.png)
 
 ### Demonstration
-Only listed several examples, more results can be found in my [github](https://github.com/Seanforfun/Deep-Learning/tree/master/DehazeNet/Results).
+Only listed several examples, more results can be found in my [github](https://github.com/Seanforfun/Deep-Learning/tree/master/Results).
 #### Outdoor
 <table>
 	<tr>
@@ -87,7 +88,7 @@ Car oriented Deep image matting is a project I worked together with CarMedia2.0 
 * Step 1: [MASK-RCNN](https://arxiv.org/pdf/1703.06870.pdf) from Facebook AI group
 ![Imgur](https://i.imgur.com/4hOnfrJ.png)
 
-* sTEP 2: [Deep Image Matting](https://arxiv.org/pdf/1703.03872.pdf) from Adobe research group
+* Step 2: [Deep Image Matting](https://arxiv.org/pdf/1703.03872.pdf) from Adobe research group
 ![Imgur](https://i.imgur.com/lPmd2QJ.png)
 
 Since the codes are now the property of the company, I cannot ditribute them right now and I will show some demos. Improvement is easily to be achieved by some future work, however my research must be stopped by some reasons.
