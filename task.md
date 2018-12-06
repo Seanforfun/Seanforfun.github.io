@@ -20,5 +20,5 @@ permalink: /task/
 - [ ] Read my book of 《Spring Cloud微服务实战》, fulfill the contents.
 - [ ] Read the book 《深入理解JVM虚拟机》 again. Write conclusions in chapter.
 - [ ] Read my book of 《Spring Cloud微服务实战》, fulfill the contents.
-- [ ] Read my book of 《Java8 in Action》.
+- [x] Read my book of 《Java8 in Action》.
 - [ ] Write first 200 leetcode problems twice.
