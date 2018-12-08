@@ -7,7 +7,7 @@ Starting from January. 2018, I majorly focused on two deep learning projects fro
 
 ## Haze removal(Jan, 2018 - June, 2018)
 ### Introduction
-We are using a new convolutional neural network "GMEAN" to create a End-to-end haze removal network. We feed the network hazed images and we can get the clear result directly. According to our results, we get the PSNR for 28.189dB and MSE for 0.964 on [RESIDES](https://sites.google.com/view/reside-dehaze-datasets/reside-%CE%B2) out door dataset.And our results on indoor evaluation dataset for PSNR and mse are 20.527dB and 0.8081 repectively.
+We are using a new convolutional neural network "GMAN" to create a End-to-end haze removal network. We feed the network hazed images and we can get the clear result directly. According to our results, we get the PSNR for 28.189dB and MSE for 0.964 on [RESIDES](https://sites.google.com/view/reside-dehaze-datasets/reside-%CE%B2) out door dataset. And our results on indoor evaluation dataset for PSNR and mse are 20.527dB and 0.8081 repectively.
 
 ![Imgur](https://i.imgur.com/HfPpj6Q.png)
 
@@ -18,7 +18,7 @@ Only listed several examples, more results can be found in my [github](https://g
 	<tr>
 		<th>Hazy</th>
 		<th>Groundtruth</th>
-		<th>Our result</th>	
+		<th>Our result</th>
 	</tr>
 	<tr>
 		<th><img src="https://i.imgur.com/8S6cpRe.jpg"/></th>		
@@ -52,7 +52,7 @@ Only listed several examples, more results can be found in my [github](https://g
 	<tr>
 		<th>Hazy</th>
 		<th>Groundtruth</th>
-		<th>Our result</th>	
+		<th>Our result</th>
 	</tr>
 	<tr>
 		<th><img src="https://i.imgur.com/81MUWBh.png"/></th>		
@@ -73,11 +73,11 @@ Only listed several examples, more results can be found in my [github](https://g
 		<th><img src="https://i.imgur.com/9bWE6zj.png"/></th>		
 		<th><img src="https://i.imgur.com/fbAWMTg.png"/></th>
 		<th><img src="https://i.imgur.com/r6GiyXj.jpg"/></th>
-	</tr>	
+	</tr>
 </table>
 
 1. Reference: [Generic Model-Agnostic Convolutional Neural Network for Single Image Dehazing](https://arxiv.org/abs/1810.02862)
-2. Code work: [GMEAN Code](https://github.com/Seanforfun/Deep-Learning/tree/master/DehazeNet)
+2. Code work: [GMAN Code](https://github.com/Seanforfun/Deep-Learning/tree/master/DehazeNet)
 3. Co-worker: [Zheng Liu](https://github.com/MintcakeDotCom)
 
 ## Car oriented Deep image matting (July, 2018 - Now)
@@ -92,13 +92,13 @@ Car oriented Deep image matting is a project I worked together with CarMedia2.0 
 ![Imgur](https://i.imgur.com/lPmd2QJ.png)
 
 Since the codes are now the property of the company, I cannot ditribute them right now and I will show some demos. Improvement is easily to be achieved by some future work, however my research must be stopped by some reasons.
- 
+
 ### Demonstration
 <table>
 	<tr>
 		<th>RGB</th>
 		<th>Result</th>
-		<th>Synthetic images</th>	
+		<th>Synthetic images</th>
 	</tr>
 	<tr>
 		<th><img src="https://i.imgur.com/NkjvE1R.png"/></th>		
