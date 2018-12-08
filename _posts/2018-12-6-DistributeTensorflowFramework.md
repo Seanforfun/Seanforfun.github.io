@@ -1,4 +1,12 @@
-# Tensorflow 集群式处理
+---
+layout: post
+title:  "Tensorflow| 集群式处理思想"
+date:   2018-12-3 12:32
+author: Botao Xiao
+categories: DeepLearning
+description: 集群式的tensorflow是从单机多卡演化出来的，当硬件限制了单机上的GPU数量以及内存容量。此时我们需要进行集群式的训练，换句话说就是分布式训练。在极度无聊于深度学习设计网络和充当民工训练的过程中，我深感于人生正在被极度的浪费。人生还是要苦中作乐一些，于是我发现了Tensorflow的分布式模块，想要设计出一套可以易于填充的集群处理框架。由于我个人的水平问题，并没有在Python中发现类似于Spring中IOC和AOP的功能，所以只能用我自己写的一些丑陋的代码去实现类似的功能。
+
+---
 集群式的tensorflow是从单机多卡演化出来的，当硬件限制了单机上的GPU数量以及内存容量。此时我们需要进行集群式的训练，换句话说就是分布式训练。在极度无聊于深度学习设计网络和充当民工训练的过程中，我深感于人生正在被极度的浪费。人生还是要苦中作乐一些，于是我发现了Tensorflow的分布式模块，想要设计出一套可以易于填充的集群处理框架。由于我个人的水平问题，并没有在Python中发现类似于Spring中IOC和AOP的功能，所以只能用我自己写的一些丑陋的代码去实现类似的功能。
 
 ### 基础原理
@@ -52,4 +60,3 @@
 ### 引用
 1. [TensorFlow分布式全套（原理，部署，实例）](https://blog.csdn.net/CodeMaster_/article/details/76223835)
 2. [深度学习（五十五）tensorflow分布式训练](https://blog.csdn.net/hjimce/article/details/61197190)
-
