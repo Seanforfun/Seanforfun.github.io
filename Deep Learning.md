@@ -158,4 +158,4 @@ Some instruction will come soon once I finished testing the framework in differe
 
 ### Link
 1. [Source code of this framework](https://github.com/Seanforfun/Distributed-Tensorflow-Framework)
-2. [My explaination to this framework: Tensorflow| 集群式处理思想](https://seanforfun.github.io/deeplearning/2018/12/03/DistributeTensorflowFramework.html)
+2. [My explaination to this framework: Tensorflow集群式处理思想](https://seanforfun.github.io/deeplearning/2018/12/03/DistributeTensorflowFramework.html)
