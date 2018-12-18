@@ -68,7 +68,43 @@ eureka.client.service-url.defaultZone=http://localhost:1111/eureka  # 指定服�
 ## 高可用注册中心
 1. 高可用注册中心的原理：包括注册中心，每个结点均是服务的提供方，也是服务的消费方。
 2. 注册中心将自己作为一个服务的提供方，将自己的配置信息注册到别的注册中心上，实现了服务清单的同步。
+3. 在微服务的分布式构架中，我们需要充分考虑发生故障的情况。使用高可用注册中心有助于我们在某个服务中心宕机以后仍能支撑整个微服务构架。
 
+### 创建两个服务注册中心，并向对方注册自己
+1. peer1注册中心， 其中peer1, peer2...都是在C:\Windows\System32\drivers\etc\hosts文件中定义的。
+```Properties
+# 当前注册中心的端口地址和项目名
+server.port=1111
+spring.application.name=eureka-server
+# 当前服务中心要注册的地址
+# 将当前服务注册到peer2上
+eureka.instance.hostname=peer2
+eureka.client.serviceUrl.defaultZone=http://peer2:1112/eureka/
+```
+
+2. peer2注册中心
+```Java
+server.port=1112
+spring.application.name=eureka-server
+# 将当前的服务注册到peer1上
+eureka.instance.hostname=peer1
+eureka.client.serviceUrl.defaultZone=http://peer1:1111/eureka
+```
+
+3. 结果：此处我使用了三个注册中心的高可用
+![Imgur](https://i.imgur.com/hAaKL1S.png)
+
+4. 将服务的提供者注册到多个服务器上（Optional）
+```properties
+server.port=1114
+spring.application.name=hello-service
+# 此时服务的提供者已经被注册到了三个注册中心上。
+eureka.client.service-url.defaultZone=http://peer1:1111/eureka, http://peer1:1112/eureka, http://peer3:1113/eureka
+```
+
+5. 通过ip地址表示注册中心地址。（Optional）
+eureka.instance.prefer-ip-address=true
 
 ### Reference
 1. [SpringCloud教程第1篇：Eureka（F版本）](https://www.fangzhipeng.com/springcloud/2018/08/30/sc-f1-eureka/)
+2. [Spring Cloud 微服务实战](https://book.douban.com/subject/27025912/)
