@@ -10,8 +10,40 @@ description: 注册与发现又可以被理解为服务的治理，我们通过�
 注册与发现又可以被理解为服务的治理，我们通过这个构架可以实现各个微服务的自动化的注册与发现。主要分成两个步骤：服务注册和服务发现。Spring cloud 二次封装了Netflix的Erureka项目，实现了注册与发现。
 
 ## 基础概念
-1. Eureka服务端（服务注册中心）：作为注册的中心，存储注册的服务，支持高可用配置。
-2. Eureka客户端： 主要用于处理服务的注册与发现。向注册中心注册自身提供的服务并周期性的发送心跳来更新服务租约。同时从服务端查询当前注册的服务信息并缓存到本地且周期性的刷新服务。
+### 服务提供者
+#### 服务注册
+1. 提供者在启动时会发送REST请求将自己注册到Eureka server上。Eureka Server接收到REST请求后，会解析元数据，格式为<服务名， <私有服务名， 服务>>。
+2. 可以通过```eureka.client.register-with-eureka=false```来选择当前服务不要注册到注册中心上。
+
+#### 服务同步
+1. 服务被注册到多个注册中心上，而两个注册中心之间也是相互注册的，当一个注册中心发现了注册的服务时，会将服务同步到所有的应该被注册的注册中心上。换句话说，就是服务会被自动同步。
+
+#### 服务续约
+1. 当一个服务被注册后，服务的提供者会维护一个心跳来保持和注册中心的联系。这就是服务的续约。
+```Properties
+#30秒回发送一次心跳保活。
+eureka.instance.lease-renewal-interval-in-seconds=30
+#90秒没有收到心跳意味着当前服务已经失效。
+eureka.instance.lease-expiration-duration-in-seconds=90
+```
+
+### 服务消费者
+#### 获取服务
+1. 此时注册中心已经被注册了一些服务，消费者会向服务注册中心发送一个请求，获取服务的列表。
+2. 获取服务是服务消费者的基础，通过```eureka.client.fetch-registry=true```来确保服务获取功能被开启。
+
+#### 服务调用
+1. 服务消费者在获取服务清单后，可以通过服务名获得具体服务的实例名和该实例的元数据信息，决定调用哪一个服务实例。
+
+#### 服务下线
+当服务下线后，服务实例会触发一个服务下线的REST请求给Eureka server。服务端接收到这个事件后，会将服务的状态值为DOWN，并将下线时间传播出去。
+
+### 服务注册中心
+#### 失效剔除
+当服务因为非正常原因下线，注册中心并未收到服务下线，注册中心会将这些无法提供服务的实例剔除。
+
+#### 自我保护
+Eureka Server的运行期间，会统计心跳失败的比例是否低于85%，Eureka Server会将这些服务保护起来，服务不过期，这种情况大多数情况下发生在本地开发的时候。可以使用```eureka.server.enable-self-preservation=false```来关闭。
 
 ## Demo
 ### 创建Server和Client
@@ -107,4 +139,3 @@ eureka.instance.prefer-ip-address=true
 
 ### Reference
 1. [SpringCloud教程第1篇：Eureka（F版本）](https://www.fangzhipeng.com/springcloud/2018/08/30/sc-f1-eureka/)
-2. [Spring Cloud 微服务实战](https://book.douban.com/subject/27025912/)
