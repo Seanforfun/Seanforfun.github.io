@@ -116,8 +116,173 @@ public class HelloService {
 
 ### 结果
 Hello sean, return from port: 8762
-
 Hello sean, return from port: 8766
+
+### 源码分析
+#### 流程分析
+![Imgur](https://i.imgur.com/2x3j2Oy.jpg)
+1. 装配一个LoadBalancerInterceptor的Bean，在Bean中实现拦截的方法。
+2. 创建一个RestTemplateCustomizer的Bean，将所有的拦截方法注入。
+3. 维护一个列表存储所有的RestTemplate。
+
+#### 代码分析
+1. 客户端的负载均衡实现了LoadBalancerClient接口
+```Java
+public interface LoadBalancerClient extends ServiceInstanceChooser {
+    //根据当前的serviceId,返回一个注册的service服务实例，在ribbon中使用的是RibbonServer作为实例返回。
+    ServiceInstance choose(String serviceId);
+    //使用从负载均衡器中挑选出来的服务实例来执行请求内容。
+	<T> T execute(String serviceId, LoadBalancerRequest<T> request) throws IOException;
+	//为系统重建一个合适的host:post的URI。
+	URI reconstructURI(ServiceInstance instance, URI original);
+}
+```
+
+2. LoadBalanceIntercrptor的最重要的方法：Interceptor
+    * 获取原本的HTTP request和serviceId，根据这些信息，决定要转发的地址。
+    * 其中requestFactory决定了转发的逻辑。
+```Java
+public ClientHttpResponse intercept(final HttpRequest request, final byte[] body,
+		final ClientHttpRequestExecution execution) throws IOException {
+	final URI originalUri = request.getURI();
+	String serviceName = originalUri.getHost();
+	Assert.state(serviceName != null, "Request URI does not contain a valid hostname: " + originalUri);
+	return this.loadBalancer.execute(serviceName, requestFactory.createRequest(request, body, execution));
+}
+```
+
+3. Ribbon中的转发逻辑, 主要分成两部分，两个方法均叫execute，其中一个调用了另一个
+    * 第一个execute装配了LoadBalancer
+    ```Java
+    public <T> T execute(String serviceId, LoadBalancerRequest<T> request, Object hint) throws IOException {
+		ILoadBalancer loadBalancer = getLoadBalancer(serviceId);
+		Server server = getServer(loadBalancer, hint);
+		if (server == null) {
+			throw new IllegalStateException("No instances available for " + serviceId);
+		}
+		RibbonServer ribbonServer = new RibbonServer(serviceId, server, isSecure(server,
+				serviceId), serverIntrospector(serviceId).getMetadata(server));
+
+		return execute(serviceId, ribbonServer, request);
+	}
+    ```
+    
+    * 第二个execute负责执行负载均衡策略。
+    ```Java
+    @Override
+    public <T> T execute(String serviceId, ServiceInstance serviceInstance, LoadBalancerRequest<T> request) throws IOException {
+    	Server server = null;
+    	if(serviceInstance instanceof RibbonServer) {
+    		server = ((RibbonServer)serviceInstance).getServer();
+    	}
+    	if (server == null) {
+    		throw new IllegalStateException("No instances available for " + serviceId);
+    	}
+    	RibbonLoadBalancerContext context = this.clientFactory
+    			.getLoadBalancerContext(serviceId);
+    	RibbonStatsRecorder statsRecorder = new RibbonStatsRecorder(context, server);
+    	try {
+    		T returnVal = request.apply(serviceInstance);
+    		statsRecorder.recordStats(returnVal);
+    		return returnVal;
+    	}
+    	// catch IOException and rethrow so RestTemplate behaves correctly
+    	catch (IOException ex) {
+    		statsRecorder.recordStats(ex);
+    		throw ex;
+    	}
+    	catch (Exception ex) {
+    		statsRecorder.recordStats(ex);
+    		ReflectionUtils.rethrowRuntimeException(ex);
+    	}
+    	return null;
+    }
+    ```
+
+4. 负载均衡器ILoadBalancer
+```Java
+public interface ILoadBalancer {
+	public void addServers(List<Server> newServers);    //向负载均衡器中添加服务。   
+	public Server chooseServer(Object key);     //根据策略，从负载均衡器中跳出一个服务实例。
+	public void markServerDown(Server server);  //用于标识某个服务已经停止运行。
+    public List<Server> getReachableServers();  //获取正常服务的列表。
+	public List<Server> getAllServers();    //获取所有服务的列表，包括正常服务和已经停止的服务。
+}
+```
+
+5. 负载均衡器的基础实现类BaseLoadBalancer
+    * 定义了两个存储服务实例的列表。
+    ```Java
+    @Monitor(name = PREFIX + "AllServerList", type = DataSourceType.INFORMATIONAL)
+    protected volatile List<Server> allServerList = Collections
+            .synchronizedList(new ArrayList<Server>());
+    @Monitor(name = PREFIX + "UpServerList", type = DataSourceType.INFORMATIONAL)
+    protected volatile List<Server> upServerList = Collections
+            .synchronizedList(new ArrayList<Server>());
+    ```
+    
+    * 定义了服务实例对象操作的策略
+    ```Java
+    private static class SerialPingStrategy implements IPingStrategy {
+        @Override
+        public boolean[] pingServers(IPing ping, Server[] servers) {
+            int numCandidates = servers.length;
+            boolean[] results = new boolean[numCandidates];
+            logger.debug("LoadBalancer:  PingTask executing [{}] servers configured", numCandidates);
+            for (int i = 0; i < numCandidates; i++) {
+                results[i] = false; /* Default answer is DEAD. */
+                try {
+                //创建一个布尔型数组，存活的服务置为True
+                    if (ping != null) {
+                        results[i] = ping.isAlive(servers[i]);
+                    }
+                } catch (Exception e) {
+                    logger.error("Exception while pinging Server: '{}'", servers[i], e);
+                }
+            }
+            return results;
+        }
+    }
+    ```
+    
+    * 定义规则，此处分析RoundRobinRule
+    ```Java
+    public Server choose(ILoadBalancer lb, Object key) {
+        if (lb == null) {
+            log.warn("no load balancer");
+            return null;
+        }
+        Server server = null;
+        int count = 0;
+        while (server == null && count++ < 10) {
+            List<Server> reachableServers = lb.getReachableServers();
+            List<Server> allServers = lb.getAllServers();
+            int upCount = reachableServers.size();
+            int serverCount = allServers.size();
+            if ((upCount == 0) || (serverCount == 0)) { //获取启动的Server列表。
+                log.warn("No up servers available from load balancer: " + lb);
+                return null;
+            }
+            int nextServerIndex = incrementAndGetModulo(serverCount);
+            server = allServers.get(nextServerIndex);
+            if (server == null) {   //如果当前的server为空，暂时放弃当前线程的运行权
+                /* Transient. */
+                Thread.yield();
+                continue;
+            }
+            if (server.isAlive() && (server.isReadyToServe())) {    //返回被选中的server。
+                return (server);
+            }
+            // Next.
+            server = null;
+        }
+        if (count >= 10) {  //共计10次轮询尝试。
+            log.warn("No available alive servers after 10 tries from load balancer: "
+                    + lb);
+        }
+        return server;
+    }
+    ```
 
 ### Reference
 1. [SpringCloud教程第2篇：Ribbon(F版本)](https://www.fangzhipeng.com/springcloud/2018/08/30/sc-f2-ribbon/)
