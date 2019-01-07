@@ -14,11 +14,11 @@ permalink: /task/
 - [x] Write first 100 leetcode problems twice.
 - [x] Write a page for listing my achievements in deep learning field.
 - [x] Watch the series of Java high concurrency on Youtube.
+- [x] Read my book of 《Java8 in Action》.
+- [x] Write first 200 leetcode problems twice.
 - [ ] Read the book 《精通Spring 4.x 企业应用开发实战》, read source code of Spring.
 - [ ] Read a book about Spring MVC, review my projects for Spring MVC.
 - [ ] Read a book of Springboot, write a conclusion paper and open a new column.
 - [ ] Read the book 《深入理解JVM虚拟机》 again. Write conclusions in chapter.
 - [ ] Read my book of 《Spring Cloud微服务实战》, fulfill the contents.
-- [x] Read my book of 《Java8 in Action》.
-- [ ] Write first 200 leetcode problems twice.
 - [ ] System Disign: system-design-primer
