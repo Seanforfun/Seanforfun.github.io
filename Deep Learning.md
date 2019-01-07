@@ -5,7 +5,7 @@ permalink: /DeepLearning/
 ---
 ## GMAN(Jan, 2018 - June, 2018, Dec, 2018)
 ### Introduction
-GMAN is a awosome Convolutional neural network purposed on haze removal. It is a completely end-to-end dehaze system so the input to the system is hazed rgb images and the output of the system is the clear images that processed by the system. The results can be found in the [Results](https://github.com/Seanforfun/GMAN_Net_Haze_Removal/tree/master/Results) column, where lists our evaluation results on SOTS evaluation dataset. There lists 500 images for indoor test and 500 images for outdoor test saparately, in each file, we can also find a log.txt file showing the psnr and ssim for each images.
+GMAN is a awesome Convolutional neural network purposed on haze removal. It is a completely end-to-end dehaze system so the input to the system is hazed rgb images and the output of the system is the clear images that processed by the system. The results can be found in the [Results](https://github.com/Seanforfun/GMAN_Net_Haze_Removal/tree/master/Results) column, where lists our evaluation results on SOTS evaluation dataset. There lists 500 images for indoor test and 500 images for outdoor test saparately, in each file, we can also find a log.txt file showing the psnr and ssim for each images.
 
 | Dateset | PSNR(dB) | SSIM | Model Path | Link |
 | :-: | :-: | :-: |  :-: | :-: |
@@ -41,7 +41,7 @@ Only listed several examples, more results can be found in my [github](https://g
 	<tr>
 		<th>Hazy</th>
 		<th>Groundtruth</th>
-		<th>Our result</th>	
+		<th>Our result</th>
 	</tr>
 	<tr>
 		<th><img src="https://i.imgur.com/8S6cpRe.jpg"/></th>		
@@ -75,7 +75,7 @@ Only listed several examples, more results can be found in my [github](https://g
 	<tr>
 		<th>Hazy</th>
 		<th>Groundtruth</th>
-		<th>Our result</th>	
+		<th>Our result</th>
 	</tr>
 	<tr>
 		<th><img src="https://i.imgur.com/81MUWBh.png"/></th>		
@@ -96,7 +96,7 @@ Only listed several examples, more results can be found in my [github](https://g
 		<th><img src="https://i.imgur.com/9bWE6zj.png"/></th>		
 		<th><img src="https://i.imgur.com/fbAWMTg.png"/></th>
 		<th><img src="https://i.imgur.com/r6GiyXj.jpg"/></th>
-	</tr>	
+	</tr>
 </table>
 
 1. Reference: [Generic Model-Agnostic Convolutional Neural Network for Single Image Dehazing](https://arxiv.org/abs/1810.02862)
