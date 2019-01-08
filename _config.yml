@@ -15,7 +15,7 @@ email: xiaob6@mcmaster.ca
 name: Botao Xiao
 description: >
   Welcome to Seanforfun technical blog.
-  This blog is powered by centrarium, please star it if you like.
+  This blog is powered by centrarium, please star if you like it.
 # Base URL of site (i.e. /blog). It should always start with a slash,
 # and never end with a slash. Set it to a blank value if hosting at the
 # root of your server.
@@ -83,7 +83,7 @@ social:
     username: Seanforfun
     url: https://github.com/Seanforfun
     desc: Follow me on GitHub
-    share: false
+    share: true
 
   - name: LinkedIn
     icon: linkedin
@@ -104,7 +104,7 @@ social:
     username:
     url:
     desc: Add me to your Circles
-    share: true
+    share: false
 
   - name: YouTube
     icon: youtube
@@ -125,7 +125,7 @@ social:
     username:
     url:
     desc: Follow me on Pinterest
-    share: true
+    share: false
 
   - name: SoundCloud
     icon: soundcloud
