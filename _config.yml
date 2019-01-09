@@ -26,7 +26,7 @@ logo: "/assets/logo.png"
 
 # Build settings
 markdown: kramdown
-paginate: 10
+paginate: 20
 paginate_path: "/page:num/"
 inter_post_navigation: false
 highlightjs_theme: "monokai-sublime"
