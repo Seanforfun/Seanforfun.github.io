@@ -16,6 +16,13 @@ permalink: /task/
 - [x] Watch the series of Java high concurrency on Youtube.
 - [x] Read my book of 《Java8 in Action》.
 - [x] Write first 200 leetcode problems twice.
+- [ ] Finish the GMAN paper modification.
+- [ ] Finetune the Alphamatting network on new 5k vehicle data(Before April).
+- [ ] Finetune MASKRCNN using car_media 2.0's vehicle data(Before April).
+- [ ] Help with finishing the shape vision project(Help with Chenxiao Niu From Jan, 2019 to April, 2019).
+- [ ] Finish the patent writing of Alphamatting project.
+- [ ] Write a backend program using springboot for QR-code project.
+- [ ] Finish my graduation paper using the data contained in Alphamatting patent(Before July, 2019).
 - [ ] Write first 300 leetcode problems twice.
 - [ ] Read the book 《精通Spring 4.x 企业应用开发实战》, read source code of Spring.
 - [ ] Read a book about Spring MVC, review my projects for Spring MVC.
