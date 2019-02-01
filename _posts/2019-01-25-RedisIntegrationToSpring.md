@@ -138,6 +138,10 @@ private <T> T stringToBean(String string, Class<T> clazz) {
 }
 ```
 
+3. Remember to use prefix for saving. Since redundant saving use same key will override the value saved in current key, so it will be a good habit to have a prefix for every key value. The best way of doing this is to use Classname:(save index) as the key, which can guarantee the unique of key value.
+```Java
+
+```
+
 ### Reference
 1. [ApplicationContext.xml](https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html)
-
