@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Primary Key Generation Methods"
-date:   2018-02-01 09:34
+date:   2019-02-01 09:34
 author: Botao Xiao
 comment: true
 categories: JavaBackend
@@ -56,11 +56,11 @@ Create table user(
 2. Composition of snowflake id:
 ```
 0 - 0000000000 0000000000 0000000000 0000000000 0 - 00000 - 00000 - 000000000000
-1. 1 Index bit: In java, highest bit shows current number is positive or negative. So normally 0.
-2. 41 bits for time stamp. The value represents in unit of milliseconds. normally we won't save current time, we always save the time different from a global beginning time.
-3. 10 bits for location. first 5 bits for data center and last 5 bits for machine id.
-4. 12 bits for serial id. It supports for 4096 ids in 1 millisecond.
 ```
+  1. 1 Index bit: In java, highest bit shows current number is positive or negative. So normally 0.
+  2. 41 bits for time stamp. The value represents in unit of milliseconds. normally we won't save current time, we always save the time different from a global beginning time.
+  3. 10 bits for location. first 5 bits for data center and last 5 bits for machine id.
+  4. 12 bits for serial id. It supports for 4096 ids in 1 millisecond.
 
 #### Generation Method
 ```Java
