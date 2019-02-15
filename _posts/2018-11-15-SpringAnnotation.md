@@ -18,6 +18,6 @@ description: 总结Spring中出现的所有注解。
 | @Transactional | METHOD, TYPE | @Transactional works on Class or method, it will ensure the safety of transaction of SQL database. | Transactional works on multiple sql commands and will roll back when error happens in current transaction. |
 | @Valid | METHOD, FIELD, CONSTRUCTOR, PARAMETER, TYPE_USE  | Majorly, @Valid is used on spring auto binding parameters. It will follow the class given in @Constraint, if return false in the isValid method, it will throw a BindException. | We can create our own validation annotations by following the rules and use globalExceptionHandler to deal with the exceptions.|
 | @CookieValue | PARAMETER | Cookie value is used to bind value in Cookie, we can specify the cookie name and bind the value to parameters. | |
-
+| @RequestParam | PARAMETER | RequestParam is used for parsing key=value&key1=value1 parameter. This method is vary similar as @PathParam, though @PathParam used for parsing the values saved in path. | |
 
 
