@@ -42,8 +42,8 @@ Message queue is an asynchronous message communication between different micro s
 
 #### Topic pattern
 1. Different from routing pattern, we can use regex to decode the binding key.
-    * match multiple word(#).
-    * used to match single word(*).
+    * match multiple word.
+    * used to match single word.
 ![Topic pattern](https://i.imgur.com/X7E4n1E.png)
 
 #### Header pattern
