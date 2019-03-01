@@ -23,7 +23,7 @@ permalink: /task/
 - [ ] Finish the patent writing of Alphamatting project.
 - [ ] Write a backend program using springboot for QR-code project.
 - [ ] Finish my graduation paper using the data contained in Alphamatting patent(Before July, 2019).
-- [ ] Write first 300 leetcode problems twice.
+- [x] Write first 300 leetcode problems twice.
 - [ ] Read the book 《精通Spring 4.x 企业应用开发实战》, read source code of Spring.
 - [ ] Read a book about Spring MVC, review my projects for Spring MVC.
 - [ ] Read a book of Springboot, write a conclusion paper and open a new column.
