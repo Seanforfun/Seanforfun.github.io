@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "MySql|Procedure存储过程"
+title:  "SQL | Procedure存储过程"
 date:   2018-12-23 10:13
 author: Botao Xiao
 categories: MySQL

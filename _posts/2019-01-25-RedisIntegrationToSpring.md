@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Redis| integrateion to Spring"
+title:  "Backend | Redis| integrateion to Spring"
 date:   2018-01-25 17:15
 author: Botao Xiao
-categories: Redis
+categories: Backend
 comment: true
 description: Redis is a kind of NoSQL(Not only sql), which means redis is not a relation based database. Redis works on RAM so we always setup a redis server (not in the EE project) as a first level or second level database. In this post, I will include the five data structure that can be saved in Redis.
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Spring Cloud注册与发现：Eureka"
+title:  "Spring Cloud | Spring Cloud注册与发现：Eureka"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 comment: true

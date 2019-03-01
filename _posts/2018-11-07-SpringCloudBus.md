@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Spring Cloud Bus 消息总线"
+title:  "Spring Cloud | Spring Cloud Bus 消息总线"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: SpringCloud

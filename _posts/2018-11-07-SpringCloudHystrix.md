@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Spring Cloud Hystrix"
+title:  "Spring Cloud | Spring Cloud Hystrix"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 comment: true

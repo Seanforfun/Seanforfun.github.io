@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Topological Sort 拓扑排序"
+title:  "Algorithm | Topological Sort 拓扑排序"
 date:   2019-1-9 13:53
 author: Botao Xiao
 categories: Algorithm

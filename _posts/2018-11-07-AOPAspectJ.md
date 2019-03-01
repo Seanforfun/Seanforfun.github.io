@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "AspectJ in Spring"
+title:  "Spring | AspectJ in Spring"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: Spring

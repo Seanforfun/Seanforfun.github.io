@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Spring Cloud Sleuth 服务追踪"
+title:  "Spring Cloud | Spring Cloud Sleuth 服务追踪"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 comment: true

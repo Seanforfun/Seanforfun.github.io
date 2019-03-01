@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Spring Cloud Zuul 路由网关"
+title:  "Spring Cloud | Spring Cloud Zuul 路由网关"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: SpringCloud

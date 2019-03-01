@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Spring Cloud Config 配置文件"
+title:  "Spring Cloud | Spring Cloud Config 配置文件"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 comment: true

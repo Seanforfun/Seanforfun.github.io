@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Java memory management 自动内存管理机制"
+title:  "JVM | Java memory management 自动内存管理机制"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: JVM
