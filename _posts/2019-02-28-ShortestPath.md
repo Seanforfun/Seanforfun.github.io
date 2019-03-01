@@ -5,10 +5,10 @@ date:   2019-02-28 22:51
 author: Botao Xiao
 categories: Algorithm
 comment: true
-description: 
+description: Shortest path can be applied to multiple situations. The most populor ones are Floyd, Dijkstra and SPFA. In this article, I will introduce some of them.
 ---
 ### Description
-Shortest path can be applied to multiple situations. The most populor ones are Floyd, Dijkstra and SPFA.
+Shortest path can be applied to multiple situations. The most populor ones are Floyd, Dijkstra and SPFA. In this article, I will introduce some of them.
 
 ### Floyd Algorithm
 #### Process
@@ -27,24 +27,12 @@ Floyd Algorithm can be applied to calculate the shortest path on directed graph 
 2. Step 2: ![Imgur](https://i.imgur.com/nTAiFNx.jpg)
 
 #### Code
+Graph:
+![Imgur](https://i.imgur.com/TSyISat.png)
 1. Floyd Algorithm
 ```Java
 public static void main(String[] args) {
     int inf = Integer.MAX_VALUE / 2 - 1000;
-    int[][] s = {{0, 12, inf, inf, inf, 16, 14},
-            {12, 0, 10, inf, inf, 7, inf},
-            {inf, 10, 0, 3, 5, 6, inf},
-            {inf, inf, 3, 0, 4, inf, inf},
-            {inf, inf, 5, 4, 0, 2, 8},
-            {16, 7, 6, inf, 2, 0, 9},
-            {14, inf, inf, inf, 8, 9, 0}};
-    int[][] p = {{0, 1, 2, 3, 4, 5, 6},
-            {0, 1, 2, 3, 4, 5, 6},
-            {0, 1, 2, 3, 4, 5, 6},
-            {0, 1, 2, 3, 4, 5, 6},
-            {0, 1, 2, 3, 4, 5, 6},
-            {0, 1, 2, 3, 4, 5, 6},
-            {0, 1, 2, 3, 4, 5, 6}};
     for(int i = 0; i < s.length; i++){ //Each step(update each intermediate vertex)
         for(int r = 0; r < s.length; r++){ //each row
             for(int c = 0; c < s.length; c++){ // Each col
@@ -84,15 +72,11 @@ Dijkstra Algorithm is used to find the minimum path in directed graph, we need t
 ![Imgur](https://i.imgur.com/cQPiUAL.jpg)
 
 #### Code
+Graph table : 
+![Imgur](https://i.imgur.com/MuywfR9.png)
 ```Java
 public static void main(String[] args) {
         int inf = Integer.MAX_VALUE / 2 - 1000;
-        int[][] s ={{0, 1, 12 , inf, inf ,inf},
-                        {inf, 0, 9, 3, inf, inf},
-                        {inf, inf, 0, inf, 5, inf},
-                        {inf, inf, 4, 0, 13, 15},
-                        {inf, inf, inf, inf, 0, 4},
-                        {inf, inf, inf, inf, inf, 0}};
         Set<Integer> set = new HashSet<>();
         set.add(0);
         int[] result = Arrays.copyOf(s[0], s.length);
