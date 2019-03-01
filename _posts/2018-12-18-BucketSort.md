@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Bucket Sort 桶排序"
+title:  "Algorithm | Bucket Sort 桶排序"
 date:   2018-12-18 10:25
 author: Botao Xiao
 categories: Algorithm

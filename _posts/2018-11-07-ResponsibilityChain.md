@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Chain of Responsibility 责任链模式"
+title:  "Design Pattern | Chain of Responsibility"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DesignPattern

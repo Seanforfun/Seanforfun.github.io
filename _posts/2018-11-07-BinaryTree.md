@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Binary Tree 二叉树"
+title:  "Data structure | Binary Tree 二叉树"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DataStructure

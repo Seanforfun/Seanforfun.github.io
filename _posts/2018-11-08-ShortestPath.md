@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Shortest Path"
+title:  "Data structure | Shortest Path"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DataStructure

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Prototype 原型模型"
+title:  "Design Pattern | Prototype Pattern"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DesignPattern

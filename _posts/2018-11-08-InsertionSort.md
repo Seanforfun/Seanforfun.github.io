@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Insert Sort 插入排序"
+title:  "Algorithm | Insert Sort 插入排序"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: Algorithm

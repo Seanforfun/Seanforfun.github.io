@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Template Method 模板方法"
+title:  "Design Pattern | Template Method 模板方法"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DesignPattern

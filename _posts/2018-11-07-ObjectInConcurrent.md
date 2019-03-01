@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Publish Object 发布对象"
+title:  "Concurrency | Publish Object 发布对象"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: Concurrency JVM

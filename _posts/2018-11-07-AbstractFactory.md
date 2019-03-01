@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Abstract Factory 抽象工厂"
+title:  "Design Pattern | Abstract Factory 抽象工厂"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DesignPattern

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Priority Blocking Queue"
+title:  "Data structure | Priority Blocking Queue"
 date:   2018-11-08 08:43:59
 author: Botao Xiao
 categories: DataStructure

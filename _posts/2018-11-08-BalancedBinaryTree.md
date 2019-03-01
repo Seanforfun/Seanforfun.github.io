@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Balanced Binary Tree 平衡二叉树"
+title:  "Data structure | Balanced Binary Tree 平衡二叉树"
 date:   2018-11-08 08:43:59
 author: Botao Xiao
 categories: DataStructure

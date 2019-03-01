@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Factory Method 简单工厂模式"
+title:  "Design Pattern | Factory Method 简单工厂模式"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DesignPattern

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "ReentrantLock, Szychronized"
+title:  "Concurrency | ReentrantLock, Szychronized"
 date:   2018-11-09 16:39:59
 author: Botao Xiao
 comment: true

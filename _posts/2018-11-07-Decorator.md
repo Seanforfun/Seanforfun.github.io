@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Decorator Pattern 装饰者模式"
+title:  "Design Pattern | Decorator Pattern"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DesignPattern

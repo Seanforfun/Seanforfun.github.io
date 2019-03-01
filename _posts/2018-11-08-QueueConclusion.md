@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Queue Conclusion"
+title:  "Data structure | Queue Conclusion"
 date:   2018-11-08 08:43:59
 author: Botao Xiao
 categories: DataStructure

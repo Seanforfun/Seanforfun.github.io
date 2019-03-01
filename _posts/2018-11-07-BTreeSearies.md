@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "B-树，B+树，B*树介绍"
+title:  "Data structure | B- tree，B+ tree，B* tree"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DataStructure

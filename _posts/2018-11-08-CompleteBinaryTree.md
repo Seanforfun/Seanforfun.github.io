@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Complete Binary Tree 完全二叉树"
+title:  "Data structure | Complete Binary Tree 完全二叉树"
 date:   2018-11-08 08:43:59
 author: Botao Xiao
 categories: DataStructure

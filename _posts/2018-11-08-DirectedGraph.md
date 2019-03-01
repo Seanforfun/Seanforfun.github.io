@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Directed Graph"
+title:  "Data structure | Directed Graph"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DataStructure

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Array Blocking Queue"
+title:  "Data structure | Array Blocking Queue"
 date:   2018-11-08 08:43:59
 author: Botao Xiao
 categories: DataStructure

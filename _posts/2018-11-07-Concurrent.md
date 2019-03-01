@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Concurrent on JMM"
+title:  "Concurrency | Concurrent on JMM"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: JVM Concurrency

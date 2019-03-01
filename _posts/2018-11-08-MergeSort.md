@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Merge Sort 并归排序"
+title:  "Algorithm | Merge Sort 并归排序"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: Algorithm

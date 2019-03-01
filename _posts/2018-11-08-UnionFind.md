@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Union-Find 并查集"
+title:  "Data structure | Union-Find 并查集"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DataStructure

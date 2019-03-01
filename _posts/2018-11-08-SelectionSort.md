@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Selection Sort(Bubble Sort) 冒泡法"
+title:  "Algorithm | Selection Sort(Bubble Sort) 冒泡法"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: Algorithm

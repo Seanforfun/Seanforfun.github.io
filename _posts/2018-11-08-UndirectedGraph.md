@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Undirected Graph 无向图"
+title:  "Data structure | Undirected Graph 无向图"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DataStructure

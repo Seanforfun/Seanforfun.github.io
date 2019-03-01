@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Minimum Spanning trees 最小生成树"
+title:  "Data structure | Minimum Spanning trees 最小生成树"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DataStructure

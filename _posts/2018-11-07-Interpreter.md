@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Interpreter Pattern 解释器模式"
+title:  "Design Pattern | Interpreter Pattern"
 date:   2018-11-07 08:43:59
 author: Botao Xiao
 categories: DesignPattern
