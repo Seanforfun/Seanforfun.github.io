@@ -72,7 +72,7 @@ public void update(int i, int val){
 	this.num[i - 1] = val;
 	while(i <= this.num.length){
 		c[i] += diff;
-		i -= lowBit(i);
+		i += lowBit(i);
 	}
 }
 ```
