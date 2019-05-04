@@ -99,9 +99,21 @@ Only listed several examples, more results can be found in my [github](https://g
 	</tr>
 </table>
 
-1. Reference: [Generic Model-Agnostic Convolutional Neural Network for Single Image Dehazing](https://arxiv.org/abs/1810.02862)
-2. Code work: [GMEAN Code](https://github.com/Seanforfun/GMAN_Net_Haze_Removal)
-3. Co-worker: [Zheng Liu](https://github.com/MintcakeDotCom)
+### Citation
+Please cite the paper if you are using this project.
+
+```
+@article{liu2019single,
+  title={Single Image Dehazing with a Generic Model-Agnostic Convolutional Neural Network},
+  author={Liu, Zheng and Xiao, Botao and Alrabeiah, Muhammad and Wang, Keyan and Chen, Jun},
+  journal={IEEE Signal Processing Letters},
+  volume={26},
+  number={6},
+  pages={833--837},
+  year={2019},
+  publisher={IEEE}
+}
+```
 
 
 ## Car oriented Deep image matting (July, 2018 - Nov, 2018)
