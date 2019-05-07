@@ -17,12 +17,12 @@ description:
 * [677. Map Sum Pairs](https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/677.%20Map%20Sum%20Pairs.md)
 * [720. Longest Word in Dictionary](https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/720.%20Longest%20Word%20in%20Dictionary.md)
 * [745. Prefix and Suffix Search](https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/745.%20Prefix%20and%20Suffix%20Search.md)
-* Conclusion: [Data structure | Trie Tree 字典树](https://seanforfun.github.io/datastructure/2018/11/07/TrieTree.html)
+* [Data structure | Trie Tree 字典树](https://seanforfun.github.io/datastructure/2018/11/07/TrieTree.html)
 
 #### BIT / Segment tree
 * [307. Range Sum Query - Mutable](https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/307.%20Range%20Sum%20Query%20-%20Mutable.md)
-* Conclusion: [Data structure | Binary Index Tree](https://seanforfun.github.io/datastructure/2018/03/03/BinaryIndexTree.html)
-* Conclusion: [Data structure | Segment Tree](https://seanforfun.github.io/datastructure/2018/03/04/SegmentTree.html)
+* [Data structure | Binary Index Tree](https://seanforfun.github.io/datastructure/2018/03/03/BinaryIndexTree.html)
+* [Data structure | Segment Tree](https://seanforfun.github.io/datastructure/2018/03/04/SegmentTree.html)
 
 #### Monotic stack
 * [84. Largest Rectangle in Histogram](https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/84.%20Largest%20Rectangle%20in%20Histogram.md)
@@ -39,7 +39,7 @@ description:
 * [79. Word Search](https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/79.%20Word%20Search.md)
 * [90. Subsets II](https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/90.%20Subsets%20II.md)
 * [216. Combination Sum III](https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/216.%20Combination%20Sum%20III.md)
-* Conclusion: We can speed up the recursion using an index and if we want all elements used once, we need to sort first and in the for loop, we need to remove duplicate values.
+* We can speed up the recursion using an index and if we want all elements used once, we need to sort first and in the for loop, we need to remove duplicate values.
 
 #### Permutation
 * [46. Permutations](https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/46.%20Permutations.md)

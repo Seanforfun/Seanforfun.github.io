@@ -222,3 +222,106 @@ When I searched this kind of new questions online, I found all of them are actua
       }
   }
   ```
+
+### Find all overlaps
+1. Find all overlaps.
+    * [986. Interval List Intersections](https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/986.%20Interval%20List%20Intersections.md)
+    * Method 1: Sort starts and ends time separately.
+    * Step 1: Sort starts and ends arrays.
+    * Step 2: Find all overlaps.
+    ```Java
+    class Solution {
+        public int[][] intervalIntersection(int[][] A, int[][] B) {
+            int len = A.length + B.length;
+            int[] starts = new int[len];
+            int[] ends = new int[len];
+            for(int i = 0; i < A.length; i++){
+                starts[i] = A[i][0];
+                ends[i] = A[i][1];
+            }
+            for(int i = A.length; i < A.length + B.length; i++){
+                starts[i] = B[i - A.length][0];
+                ends[i] = B[i - A.length][1];
+            }
+            Arrays.sort(starts);
+            Arrays.sort(ends);
+            List<int[]> res = new ArrayList<>();
+            for(int i = 1; i < starts.length; i++){
+                if(starts[i] <= ends[i - 1]){
+                    res.add(new int[]{starts[i], ends[i - 1]});
+                }
+            }
+            int size = res.size();
+            int[][] result = new int[size][2];
+            for(int i = 0; i < size; i++){
+                result[i] = res.get(i);
+            }
+            return result;
+        }
+    }
+    ```
+    
+    * Method 2: Sort intervals together
+    1. If start time equals, sort by end time.
+    2. Find all overlaps.
+    ```Java
+    class Solution {
+        public int[][] intervalIntersection(int[][] A, int[][] B) {
+            int len = A.length + B.length;
+            if(len == 0) return new int[0][2];
+            int[][] arr = new int[len][2];
+            for(int i = 0; i < A.length; i++)   arr[i] = A[i];
+            for(int i = A.length; i < len; i++) arr[i] = B[i - A.length];
+            Arrays.sort(arr, (a, b)->{
+                return a[0] == b[0] ? a[1] - b[1]: a[0] - b[0];
+            });
+            int end = arr[0][1];
+            List<int[]> res = new ArrayList<>();
+            for(int i = 1; i < len; i++){
+                if(arr[i][0] <= end){
+                    res.add(new int[]{arr[i][0], Math.min(arr[i][1], end)});
+                }
+                if(end < arr[i][1])
+                    end = arr[i][1];
+            }
+            int size = res.size();
+            int[][] result = new int[size][2];
+            for(int i = 0; i < size; i++) result[i] = res.get(i);
+            return result;
+        }
+    }
+    ```
+
+2. Find all non-overlaps
+    * [759. Employee Free Time](https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/759.%20Employee%20Free%20Time.md)
+    * Step 1: We sort together with the start time, it start time is same, sort by end time.
+    * Step 2: Idea is same as the previous question.
+    ```Java
+    class Solution {
+        private static final Comparator<int[]> cmp = new Comparator<int[]>(){
+            @Override
+            public int compare(int[] a, int[] b){
+                return a[0] == b[0] ? (a[1] - b[1]): (a[0] - b[0]);
+            }
+        };
+        public int[][] employeeFreeTime(int[][][] schedule) {
+            List<int[]> list = new ArrayList<>();
+            for(int[][] person : schedule){
+                for(int[] interval : person)
+                    list.add(interval);
+            }
+            if(list.size() == 0) return new int[0][2];
+            Collections.sort(list, cmp);
+            List<int[]> res = new ArrayList<>();
+            int end = list.get(0)[1];
+            for(int i = 1; i < list.size(); i++){
+                int[] cur = list.get(i);
+                if(cur[0] > end){
+                    res.add(new int[]{end, cur[0]});
+                }
+                end = Math.max(end, cur[1]);
+            }
+            return res.toArray(new int[0][2]);
+        }
+    }
+    ```
