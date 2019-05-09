@@ -3,10 +3,8 @@ layout: page
 title: LeetCode
 permalink: /leetcode/
 ---
-  <div style="color:#000;size:20;font:Georgia;font-weight:bold">I only listed the problems I solved twice. More questions will be updated for sure and they can be found at my github repository <a href="https://github.com/Seanforfun/Algorithm-and-Leetcode">Algorithm-and-Leetcode</a></div>
-  <div style="color:#000;size:20;font:Georgia;font-weight:bold">I started solving questions on leetcode since Aug, 2018. The process is both interesting and annoying, well, companion is always welcomed. I hope I can find someone can discuss with me from time to time. If you are interested in solving leetcode questions together with me, I can promise this will be a wonderful trip for both of us!</div>
-  
-  {% assign items = site.categories.Leetcode | sort: 'title' %}
+  <div style="color:#000;size:20;font:Georgia;font-weight:bold">I started solving questions on leetcode since Aug, 2018 and only listed the problems I solved twice. More questions will be updated for sure and they can be found at my github repository <a href="https://github.com/Seanforfun/Algorithm-and-Leetcode">Algorithm-and-Leetcode</a></div>  
+  {% assign items = site.leetcode | sort: 'title' %}
   {% for post in items %}
     <li>
       <strong>

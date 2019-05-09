@@ -197,3 +197,9 @@ protocols:
     os_repo: "https://github.com/Seanforfun/Seanforfun.github.io"
     os_rcs_type: "git"
     os_src: "https://github.com/Seanforfun/Seanforfun.github.io.git"
+
+collections:
+   leetcode:
+     output: yes
+   post:
+     output: yes
