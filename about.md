@@ -24,6 +24,6 @@ permalink: /about/
 
 <p>Meanwhile, I am also responsible for some deep learning coding using Tensorflow. You can go to the <a href="https://seanforfun.github.io/DeepLearning/">Deep Learning</a> link for more information. I finished 2 projects in 2018, which are Haze removal and Car oriented image matting. The code for <a href="https://github.com/Seanforfun/GMAN_Net_Haze_Removal">Haze Removal</a> is open sourced and can be used on non-commercial purpose. The car oriented image matting project belongs to company Car media 2.0 now and cannot be open sourced, however, discussions are welcomed.
 
-<p>Since my graduate date is approaching, I'm thinking about having a full-time SDE in Waterloo, Toronto or Ottawa region. Please you have any empty role related to Java backend, please send me an e-mail!</p>
+<p>Since my graduate date is approaching, I'm thinking about having a full-time SDE in Waterloo, Toronto and Ottawa region. Please you have any empty role related to Java backend, please send me an e-mail!</p>
 
 <p>Thank you for reading! And enjoy!</p>
