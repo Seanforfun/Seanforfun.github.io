@@ -4,7 +4,7 @@ title:  "Backend | Primary Key Generation Methods"
 date:   2019-02-01 09:34
 author: Botao Xiao
 comment: true
-categories: JavaBackend
+categories: Backend
 description: Primary key is the unique id for a instance saving in the database. In this article, I want to discribe three methods to generate the primary key, which are UUID, database auto_increment and snowflake algorithm from Twitter.
 ---
 

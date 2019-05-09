@@ -4,7 +4,7 @@ title:  "Backend | Message Queue"
 date:   2019-02-21 17:11
 author: Botao Xiao
 comment: true
-categories: JavaBackend
+categories: Backend
 description: Message queue is an asynchronous message communication between different micro services. Message will be saved on message queue before handled by a service. The message queue can be used to deffer the high periodical volumn.
 ---
 # Backend | Message Queue
