@@ -10,11 +10,11 @@ exclude:
 
 # Site settings
 title: Seanforfun
-subtitle: "Patient and Focus."
+subtitle: "Be Patient and Focused."
 email: xiaob6@mcmaster.ca
 name: Botao Xiao
 description: >
-  Welcome to Seanforfun technical blog.
+  Welcome to Botao Xiao's techblog.
   This blog is powered by centrarium.
 # Base URL of site (i.e. /blog). It should always start with a slash,
 # and never end with a slash. Set it to a blank value if hosting at the
