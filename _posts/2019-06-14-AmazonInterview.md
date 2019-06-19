@@ -425,9 +425,7 @@ Statements: I) Lithium has the smallest size. II) The size of potassium and cesi
             }
             return dp[height -  1][width - 1];
         }
-        public static void main(String[] args) {
-            int[][] grid = new int[][]{{8, 4, 7},
-                    {6, 5, 9}};
+        public static void main(String[] args) {            
             System.out.println(maxMinPath(grid));
         }
     }
