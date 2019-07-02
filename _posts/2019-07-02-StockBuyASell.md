@@ -8,6 +8,11 @@ comment: true
 description: Leetcode stock buy and sell questions.
 ---
 
+### Methodology
+1. Always use dp.
+2. Correct initialization.
+3. Figure out the states and their relationship.(Transaction function)
+
 ### Question 1:
 * [121. Best Time to Buy and Sell Stock](https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/121.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock.md)
     1. O(n) time complexity
@@ -119,5 +124,46 @@ description: Leetcode stock buy and sell questions.
                 }
                 return sells[len];
             }
+    }
+    ```
+
+### Question 5: With cooldown
+* [309. Best Time to Buy and Sell Stock with Cooldown](https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/309.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown.md)
+    1. We just need to write correct transaction function
+    ```Java
+    class Solution {
+        public int maxProfit(int[] prices) {
+            if(prices == null || prices.length <= 1) return 0;
+            int len = prices.length;
+            int[] buys = new int[len + 1];
+            int[] sells = new int[len + 1];
+            int[] cools = new int[len + 1];
+            buys[1] = -prices[0];
+            for(int i = 2; i <= len; i++){
+                buys[i] = Math.max(buys[i - 1], cools[i - 1] - prices[i - 1]);
+                cools[i] = Math.max(cools[i - 1], sells[i - 1]);
+                sells[i] = Math.max(buys[i - 1] + prices[i - 1], sells[i - 1]);
+            }
+            return sells[len];
+        }
+    }
+    ```
+
+### Question 6: with fee
+* [714. Best Time to Buy and Sell Stock with Transaction Fee](https://github.com/Seanforfun/Algorithm-and-Leetcode/blob/master/leetcode/714.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Transaction%20Fee.md)
+    ```Java
+    class Solution {
+        public int maxProfit(int[] prices, int fee) {
+            if(prices == null || prices.length <= 1) return 0;
+            int len = prices.length;
+            int[] buys = new int[len + 1];
+            int[] sells = new int[len + 1];
+            buys[1] = -prices[0];
+            for(int i = 2; i <= len; i++){
+                buys[i] = Math.max(buys[i - 1], sells[i - 1] - prices[i - 1]);
+                sells[i] = Math.max(sells[i - 1], buys[i - 1] + prices[i - 1] - fee);
+            }
+            return sells[len];
+        }
     }
     ```
