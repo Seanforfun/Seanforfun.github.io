@@ -20,8 +20,8 @@ permalink: /task/
 - [x] Finetune the Alphamatting network on new 5k vehicle data(Before April).
 - [x] Finetune MASKRCNN using car_media 2.0's vehicle data(Before April).
 - [x] Write first 300 leetcode problems twice.
-- [ ] Write a backend program using springboot for QR-code project.
-- [ ] Finish my graduation paper using the data contained in Alphamatting patent(Before July, 2019).
+- [x] Write a backend program using springboot for QR-code project.
+- [x] Finish my thesis paper using the data contained in Alphamatting patent(Before July, 2019).
 - [ ] Read the book 《Spring 4.x》, read source code of Spring.
 - [ ] Read a book about Spring MVC, review my projects for Spring MVC.
 - [ ] Read a book of Springboot, write a conclusion paper and open a new column.
