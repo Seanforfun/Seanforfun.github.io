@@ -890,7 +890,6 @@ Statements: I) Lithium has the smallest size. II) The size of potassium and cesi
 ### Find the minimum path to reach the end. BFS
 	```Java
 	public class MinimumDistance {
-		private static final int[][] dir = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 		public int minimumDistance(int numRows, int numCols, List<List<Integer>> area){
 			if(area.get(0).get(0) == 9) return 0;
 			Queue<int[]> q = new LinkedList<>();
