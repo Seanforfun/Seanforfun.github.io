@@ -704,6 +704,309 @@ Statements: I) Lithium has the smallest size. II) The size of potassium and cesi
 4. Both together are not sufficient for answering the problem question
 5. Either of statement is sufficient for answering the problem question
 
+### Social Hiring
+1. Cost of assembly.
+	```Java
+	public class AssembleComponents {
+		private int minTimeAssemble(List<Integer> times){
+			if(times == null) return -1;
+			else if(times.size() == 1) return times.get(0);
+			else if(times.size() == 0) return  0;
+			PriorityQueue<Integer> pq = new PriorityQueue<>();
+			for(Integer time : times){
+				pq.offer(time);
+			}
+			int res = 0;
+			while (pq.size() > 1){
+				int first = pq.poll(), second = pq.poll();
+				res += first + second;
+				pq.offer(first + second);
+			}
+			return res;
+		}
+
+		public static void main(String[] args) {
+			AssembleComponents assembleComponents = new AssembleComponents();
+			List<Integer> list = new ArrayList<>();
+			list.addAll(Arrays.asList(8,4,6,12));
+			System.out.println(assembleComponents.minTimeAssemble(list));
+		}
+	}
+	```
+
+### Create a BST using arry and find the distance between 2 nodes.
+	```Java
+	public class BSTNodeDistance {
+		private static class Node{
+			int v;
+			Node left, right;
+			public Node(int v){
+				this.v = v;
+			}
+		}
+		private Node root;
+		private Map<Integer, List<Node>> adj;
+		private Map<Integer, Node> nodeMap;
+		public int findMinimumDistanceInBST(int[] arr, int a, int b){
+			if(arr == null || arr.length == 0) return 0;
+			adj = new HashMap<>();
+			nodeMap = new HashMap<>();
+			this.root = new Node(arr[0]);
+			adj.put(arr[0], new ArrayList<>());
+			nodeMap.put(arr[0], root);
+			for(int i = 1; i < arr.length; i++){
+				insert(root, arr[i]);
+			}
+			int step = 0;
+			Queue<Node> q = new LinkedList<>();
+			q.offer(nodeMap.get(a));
+			Set<Integer> visited = new HashSet<>();
+			visited.add(root.v);
+			while(!q.isEmpty()){
+				int size = q.size();
+				for(int sz = 0; sz < size; sz++){
+					Node cur = q.poll();
+					if(cur.v == b) return step;
+					List<Node> neighbours = adj.get(cur.v);
+					for(Node next : neighbours){
+						if(visited.contains(next.v)) continue;
+						visited.add(next.v);
+						q.offer(next);
+					}
+				}
+				step++;
+			}
+			return -1;
+		}
+		private void insert(Node node, int cur){
+			if(cur > node.v){
+				if(node.right == null){
+					node.right = new Node(cur); // next is current node.
+					List<Node> list = adj.getOrDefault(cur, new ArrayList<>());
+					list.add(node);
+					adj.put(cur, list);
+					List<Node> parent = adj.getOrDefault(node.v, new ArrayList<>());
+					parent.add(node.right);
+					adj.put(node.v, parent);
+					nodeMap.put(cur, node.right);
+				}else insert(node.right, cur);
+			}else{
+				if(node.left == null){
+					node.left = new Node(cur); // next is current node.
+					List<Node> list = adj.getOrDefault(cur, new ArrayList<>());
+					list.add(node);
+					adj.put(cur, list);
+					List<Node> parent = adj.getOrDefault(node.v, new ArrayList<>());
+					parent.add(node.left);
+					adj.put(node.v, parent);
+					nodeMap.put(cur, node.left);
+				}else insert(node.left, cur);
+			}
+		}
+
+		public static void main(String[] args) {
+			BSTNodeDistance distance = new BSTNodeDistance();
+			System.out.println(distance.findMinimumDistanceInBST(new int[]{5,6,3,1,2,4}, 2, 4));
+		}
+	}
+	```
+
+### Find the minimum city connection cost. => MST
+	```Java
+	public class CityConnection {
+		private int[] uf;
+		public int getMinimumCostToConstruct(int numTotalAvailableCities,    //6
+													int numTotalAvailableRoads, //3
+													List<List<Integer>> roadsAvailable,     //[[1,4], [4,5], [2,3]]
+													int numNewRoadsConstruct,   //4
+													List<List<Integer>> costNewRoadsConstruct){ //[[1,2,5], [1,3,10], [1,6,2], [5,6,5]]
+			if(numTotalAvailableCities == 0 || numTotalAvailableRoads >= numTotalAvailableCities) return 0;
+			if(numNewRoadsConstruct == 0) return -1;
+			this.uf = new int[numTotalAvailableCities + 1];
+			for(int i = 1; i <= numTotalAvailableCities; i++){
+				uf[i] = i;
+			}
+			for(List<Integer> pair: roadsAvailable){
+				union(pair.get(0), pair.get(1));
+			}
+			PriorityQueue<List<Integer>> pq = new PriorityQueue<List<Integer>>((a, b)->{
+				return a.get(2) - b.get(2);
+			});
+			for (List<Integer> road: costNewRoadsConstruct){
+				pq.offer(road);
+			}
+			int result = 0;
+			while (!pq.isEmpty()){
+				List<Integer> road = pq.poll();
+				int city1 = road.get(0), city2 = road.get(1), cost = road.get(2);
+				if(!connected(city1, city2)){
+					result += cost;
+					union(city1, city2);
+				}
+			}
+			int cur = find(1);
+			for(int i = 2; i <= numTotalAvailableCities; i++){
+				if(find(i) != cur) return -1;
+			}
+			return result;
+		}
+		private int find(int i){
+			if(uf[i] != i){
+				uf[i] = find(uf[i]);
+			}
+			return uf[i];
+		}
+		private void union(int i, int j){
+			int p = find(i);
+			int q = find(j);
+			uf[p] = q;
+		}
+		private boolean connected(int i, int j){
+			return find(i) == find(j);
+		}
+	}
+	```
+
+### Closest K points
+	```Java
+	public class DeliveryStrategy {
+		public List<List<Integer>> closestXdestinations(int numDestinations, List<List<Integer>> allLoacations, int numDeliveries){
+			if(allLoacations == null) return null;
+			PriorityQueue<List<Integer>> pq = new PriorityQueue<List<Integer>>((a, b)->{
+			   return a.get(0) * a.get(0) + a.get(1) * a.get(1) - b.get(0) * b.get(0) - b.get(1) * b.get(1);
+			});
+			for(List<Integer> location: allLoacations){
+				pq.offer(location);
+			}
+			List<List<Integer>>  result = new ArrayList<>();
+			while(numDeliveries-- > 0){
+				result.add(pq.poll());
+			}
+			return result;
+		}
+	}
+	```
+
+### Find the minimum path to reach the end. BFS
+	```Java
+	public class MinimumDistance {
+		private static final int[][] dir = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+		public int minimumDistance(int numRows, int numCols, List<List<Integer>> area){
+			if(area.get(0).get(0) == 9) return 0;
+			Queue<int[]> q = new LinkedList<>();
+			Set<Integer> visited = new HashSet<>();
+			visited.add(0);
+			q.offer(new int[]{0, 0});
+			int step = 0;
+			while (!q.isEmpty()){
+				int size = q.size();
+				int tx = 0, ty = 0;
+				for(int sz = 0; sz < size; sz++){
+					int[] cur = q.poll();
+					if(area.get(cur[0]).get(cur[1]) == 9) return step;
+					for (int d = 0; d < 4; d++){
+						tx = cur[0] + dir[d][0];
+						ty = cur[1] + dir[d][1];
+						if(tx >= 0 && tx < numRows && ty >= 0 && ty < numCols && area.get(tx).get(ty) != 0 && !visited.contains(tx * numRows + ty)){
+							visited.add(tx * numRows + ty);
+							q.offer(new int[]{tx, ty});
+						}
+					}
+				}
+				step++;
+			}
+			return -1;
+		}
+	}
+	```
+
+### Partitional Lables Greedy
+	```Java
+	public class PartitionLabels {
+		public List<Integer> partitionLabels(String S) {
+			int[] last = new int[26];
+			char[] arr = S.toCharArray();
+			for(int i = arr.length - 1; i >= 0; i--){
+				if(last[arr[i] - 'a'] == 0) last[arr[i] - 'a'] = i;
+			}
+			List<Integer> res = new ArrayList<>();
+			int slow = 0, fast = 0, max = last[arr[0] - 'a'];
+			while(fast < arr.length){
+				while(fast <= max){
+					max = Math.max(last[arr[fast++] - 'a'], max);
+				}
+				res.add(fast - slow);
+				slow = fast;
+				if(slow < arr.length) max = last[arr[slow] - 'a'];
+			}
+			return res;
+		}
+	}
+	```
+
+### Reorder Logs
+	```Java
+	public class ReorderLogs {
+		public String[] reorderLogFiles(String[] logs) {
+			if(logs == null) return null;
+			int len = logs.length;
+			List<String> letterLogs = new ArrayList<>();
+			List<String> digitLogs = new ArrayList<>();
+			for(String log: logs){
+				String[] tokens = log.split(" ");
+				if(Character.isDigit(tokens[1].charAt(0))){
+					digitLogs.add(log);
+				}else letterLogs.add(log);
+			}
+			Collections.sort(letterLogs, (a, b)->{
+				String subA = a.substring(a.indexOf(' ') + 1);
+				String subB = b.substring(b.indexOf(' ') + 1);
+				int cmp = subA.compareTo(subB);
+				return cmp != 0 ? cmp : a.substring(0, a.indexOf(' ')).compareTo(b.substring(0, b.indexOf(' ')));
+			});
+			String[] res = new String[len];
+			int count = 0;
+			while(count < letterLogs.size()){
+				res[count] = letterLogs.get(count);
+				count++;
+			}
+			int temp = count;
+			while(count < len){
+				res[count] = digitLogs.get(count - temp);
+				count++;
+			}
+			return res;
+		}
+	}
+	```
+
+### Two sum closest
+	```Java
+	public class TwoSumClosest {
+		public List<List<Integer>> closestPath(int mileage, List<List<Integer>> forward, List<List<Integer>> backward){
+			if(forward == null || backward == null || forward.size() == 0 || backward.size() == 0) return null;
+			int diff = Integer.MAX_VALUE;
+			List<List<Integer>> result = new ArrayList<>();
+			for(int i = 0; i < forward.size(); i++){
+				for(int j = 0; j < backward.size(); j++){
+					int f = forward.get(i).get(1), b = backward.get(j).get(1);
+					if(f + b >= mileage) continue;
+					else if(mileage - f - b < diff){
+						diff = mileage - f - b;
+						result.clear();
+						List<Integer> cur = new ArrayList<>(Arrays.asList(i + 1, j + 1));
+						result.add(cur);
+					}else if(mileage - f - b == diff){
+						List<Integer> cur = new ArrayList<>(Arrays.asList(i + 1, j + 1));
+						result.add(cur);
+					}
+				}
+			}
+			return result;
+		}
+	}
+	```
+
 ## Reference
 1. [Amazon OA](https://wdxtub.com/interview/14520850399861.html)
 2. [Amazon Online Assessment 1](https://aonecode.com/getArticle/215)
