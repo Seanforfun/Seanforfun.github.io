@@ -10,6 +10,8 @@ description:
 
 Read with [code](https://github.com/Seanforfun/llvm-kaleidoscope/tree/master/Chapt1_Lexer_And_Parser)
 
+## Lexer and Parser
+
 ### What is Lexer(Character Level)
 When compiler is translating a code, it requires to split code into tokens. The tool to extract the tokens is call lexer(or scanner).
 
@@ -131,6 +133,7 @@ Only tokens cannot represent the grammar or higher level meaning of the program.
     ```
 
 3. VariableAST: class for variable like 'a'
+
     ```objectivec
     class VariableExprAST: public ExprAST{
        std::string variable;
@@ -142,6 +145,7 @@ Only tokens cannot represent the grammar or higher level meaning of the program.
 
 4. BinaryOpAST: hold binary operations
     * a + b, op is '+', LHS, RHS are variableAST.
+    
     ```objectivec
     class BinaryExprAST: public ExprAST{
         char Op;
@@ -156,6 +160,7 @@ Only tokens cannot represent the grammar or higher level meaning of the program.
 
 5. FunctionCallAST: hold function call.
     * foo(a, b), callee is function name foo and args is a vector hold all parameter.
+    
     ```objectivec
     class CallExprAST: public ExprAST{
         std::string callee; // function name;
@@ -360,5 +365,30 @@ Only tokens cannot represent the grammar or higher level meaning of the program.
         if(auto body = parseExpression();
         auto proto = llvm::make_unique<ProtoTypeAST>("", std::vector<std::string> v);
         return llvm::make_unique<FunctionAST>(std::move(proto), std::move(body));
+    }
+    ```
+
+### Top Level Handlers
+1. Definition Handler:
+    ```objectivec
+    static void definitionHandler(){
+        if(parseDefinition()){
+            fprintf(stderr, "Parsed a function definition.\n")
+        }else getNextToken();
+    }
+    ```
+
+2. Extern Handler:
+    ```objectivec
+    static void externHandler(){
+        if(parseExtern()) fprintf(stderr, "Parsed a extern.\n")
+        else getNextToken();
+    }
+    ```
+
+3. Top Level Handler for anonymous functions:
+    ```objectivec
+    static void topLevelHandler(){
+        if(parseTopLevel()) fprintf(stderr, "Parsed a top-level expression.\n")
     }
     ```
