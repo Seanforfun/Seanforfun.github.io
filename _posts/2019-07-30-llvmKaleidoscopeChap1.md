@@ -3,7 +3,7 @@ layout: post
 title:  "LLVM | Tutorial Lexer and Parser"
 date:   2019-07-30 15:20
 author: Botao Xiao
-categories: LLVM
+categories: llvm
 comment: true
 description: 
 ---
@@ -51,6 +51,7 @@ static double numVal; //TOKEN_NUMBER: if current token is a number, this variabl
     4. Comment all character after # unless we meet EOF , \r or \n. Cannot handle the case (# \r\n), \n will be read as a token and return.
     5. EOF case.
     6. Other cases, '(', ')', ',' etc, for these symbols just return them.
+	
 ```objectivec
 /**
  * Get token from standard input.
