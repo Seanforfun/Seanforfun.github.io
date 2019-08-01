@@ -5,12 +5,17 @@ date:   2019-07-30 15:20
 author: Botao Xiao
 categories: llvm
 comment: true
-description: 
+description: Kaleidoscope tutorial talking about lexer and parser(frontend).
 ---
 
 Read with [code](https://github.com/Seanforfun/llvm-kaleidoscope/tree/master/Chapt1_Lexer_And_Parser)
 
-## Lexer and Parser
+### Code
+Codes can be found at my github [toy.cpp](https://github.com/Seanforfun/llvm-kaleidoscope/blob/master/Chapt1_Lexer_And_Parser/toy.cpp) and cmake file can be found at [CMakeList.txt](https://github.com/Seanforfun/llvm-kaleidoscope/blob/master/Chapt1_Lexer_And_Parser/CMakeLists.txt).
+
+Bugs may be found in this file and the code in github is tested.
+
+Please make sure you have installed LLVM enviroment.
 
 ### What is Lexer(Character Level)
 When compiler is translating a code, it requires to split code into tokens. The tool to extract the tokens is call lexer(or scanner).
@@ -51,7 +56,6 @@ static double numVal; //TOKEN_NUMBER: if current token is a number, this variabl
     4. Comment all character after # unless we meet EOF , \r or \n. Cannot handle the case (# \r\n), \n will be read as a token and return.
     5. EOF case.
     6. Other cases, '(', ')', ',' etc, for these symbols just return them.
-	
 ```objectivec
 /**
  * Get token from standard input.
@@ -154,7 +158,7 @@ Only tokens cannot represent the grammar or higher level meaning of the program.
     
     public:
         BinaryExprAST(char op, std::unique_ptr<ExprAST> &lhs,
-                std::unique_ptr<ExprAST> &rhs) :
+                std::unique_ptr<ExprAST> rhs) :
                 Op(op), LHS(std::move(lhs)), RHS(std::move(rhs)) {}
     };
     ```
@@ -169,7 +173,7 @@ Only tokens cannot represent the grammar or higher level meaning of the program.
     
     public:
         CallExprAST(const std::string &callee,
-                const std::vector<std::unique_ptr<ExprAST>> &args) : callee(callee), args(std::move(args)) {}
+                std::vector<std::unique_ptr<ExprAST>> &args) : callee(callee), args(std::move(args)) {}
     };
     ```
 
@@ -181,7 +185,7 @@ Only tokens cannot represent the grammar or higher level meaning of the program.
     
     public:
         ProtoTypeAST(const std::string &name,
-                const std::vector<std::string> &args) : name(name), args(std::move(args)) {}
+                std::vector<std::string> &args) : name(name), args(std::move(args)) {}
     };
     ```
 
@@ -191,7 +195,7 @@ Only tokens cannot represent the grammar or higher level meaning of the program.
         std::unique_ptr<ProtoTypeAST> prototype;
         std::unique_ptr<ExprAST> body;
     public:
-        FunctionAST(std::unique_ptr<ProtoTypeAST> &prototype, std::unique_ptr<ExprAST> &body) :
+        FunctionAST(std::unique_ptr<ProtoTypeAST> &prototype, std::unique_ptr<ExprAST> body) :
         prototype(std::move(prototype)), body(std::move(body)) {}
     };
     ```
@@ -393,3 +397,6 @@ Only tokens cannot represent the grammar or higher level meaning of the program.
         if(parseTopLevel()) fprintf(stderr, "Parsed a top-level expression.\n")
     }
     ```
+
+### Results
+![Imgur](https://i.imgur.com/Jgm6QW3.png)

@@ -39,6 +39,8 @@ description: Installation process on Ubuntu with script file.
     make install
     ```
 
+4. Add ENVIRONMENT to bash file. e.g export CPLUS_INCLUDE_PATH=/usr/local/llvm/include
+
 ### My Installation Script, run in administrator
 ```bash
 # !/bin/bash
