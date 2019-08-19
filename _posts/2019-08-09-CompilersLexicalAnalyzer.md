@@ -8,6 +8,8 @@ comment: true
 description: Explain the theoretical detail of Lexical Analyzer. IN PROGRESS!!!
 ---
 
+# Compiling | Lexical Analyzer 词法分析器
+
 ### 介绍
 1. 编译器的基本结构
     
@@ -31,12 +33,12 @@ description: Explain the theoretical detail of Lexical Analyzer. IN PROGRESS!!!
         1. ε: 空字符。
         2. e1: 单独字符
     * 复合正则表达式
-        3. e1|e2: 选择表达式，当前字符可为e1或e2，此处e1,e2均可为复合表达式。
+        3. ```e1|e2```: 选择表达式，当前字符可为e1或e2，此处e1,e2均可为复合表达式。
         4. e1e2: 连接表达式，连接两个表达式。有先后性。
         5. e*: 闭包表达式。 e* = {ε, e, ee, eee...}。
 
 3. 除了上述五种基本表达式以外，还有一些为了简便操作而生成的表达式。
-    * [e1-en]: e1 | e2 | e3 | ... | en, 其中e1到en必须在字符集中是连续的。
+    * [e1-en]: ```e1 | e2 | e3 | ... | en```, 其中e1到en必须在字符集中是连续的。
     * e+: 一个或多个e， {e, ee, eee ...}
     * e?: {ε, e}
     * . : 除了'\n'以外的所有字符。
