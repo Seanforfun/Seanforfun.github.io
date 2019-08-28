@@ -1,62 +1,131 @@
 ---
 layout: post
-title:  "C++ | Pointer and Reference with array"
-date:   2019-08-20 12:52
+title:  "C++ | Dynamic Memory and Smart Pointers"
+date:   2019-07-26 10:06
 author: Botao Xiao
 categories: C++
 comment: true
 description: 
 ---
-### Introduction
-The combinations of pointers and arrays are always confuse, here I want to make a small conclusion about this topic.
 
-### Pointer array 指针数组(Correct)
-```int* arr[10];```
+# Dynamic Memory and Smart Pointers
 
-* Explanation:
-    1. 从右向左理解。(Right to left)
-    2. ```arr[10]```: 定义了一个数组，其大小为10。
-    3. ```int*```: 定义了数组存储的变量类型，均为指针。
-    4. 定义了一个size为10的指针数组。
+### Dynamic Memory
+Dynamic memory in C++ is the memory assigned by programmer which locates on heap. Programmers are responsible for the life cycle of this memory, which means this memory will not be free unless programmer mannually free it.
 
-#### Reference array(Wrong)
-```int& arr[10];```
-
-* Explanation:
-    1. No this kind of structure, people can just use array itself.
-
-#### Pointer to Array 指向数组的指针(Correct)
-```
-int arr[10];
-int (*ptr)[10] = &arr; 
-```
-
-* Explanation:
-    1. 定义了一个指针，指向一个含有十个元素的int数组。
-    2. 从中间向两侧看。
-    3. (*ptr): 定义一个指针。
-    4. 其指向的元素是一个数组(*ptr[10])。
-    5. 数组中的每一个元素都是int型变量。
-
-#### Reference to Array 数组的引用(Correct)
+Creation and free memory are caused by keyword ```new``` and ```delete```.
 ```objectivec
-int arr[10];
-int (&ref)[10] = arr;
+int* intPtr = new int;  // for single variable.
+delete(intPtr);
+int* arrPtr = new int[10];  // for Array.
+delete[](arrPtr);
 ```
+    
+* new and delete must exist in pair.
+    
+### Smart Pointer.
+The idea of smart pointer is like a pointer with GC. We have two pointer class which are unique_ptr and shared_ptr.
 
-* Explanation:
-    1. 定义一个引用，引用一个数组。
-    2. (&ref): 定义一个引用。
-    3. (&ref)[10]: 该引用指向一个含有10个元素的数组。
-    4. int (&ref)[10]: 数组中的每个元素都是int型变量。
+![Imgur](https://i.imgur.com/NkwH8Ar.png)
 
-#### Reference to pointer array(Correct)
-```int * (&ref)[10]```
+### shared_ptr
+Share ptr maintances a reference count for current pointer, once the value drop to 0, gc.
 
-* Explanation:
-    1. (&ref): ref是一个引用(首先括号结合)。
-    2. (&ref)[10]: ref引用的对象含有十个元素。
-    3. int * (&ref)[10]: 数组中每个元素都是一个指针。
+![Imgur](https://i.imgur.com/o3adB5J.png)
+
+* Basic usage of shared_ptr
+    ![Imgur](https://i.imgur.com/CBlmsrZ.png)
+    ```objectivec
+        //make_share会隐式的调用new int(1024)并生成一个指向该地址的shared_ptr.
+        shared_ptr<int> ptr = make_shared<int>(1024);
+        cout << ptr.unique() << endl; //此处为True.
+        // 调用了shared_ptr的explicit构造函数，生成一个新的shared_ptr对象，指向同一块地址
+        shared_ptr<int> second(ptr);
+        // output: 0x4e7130 0x4e7130,两个指向同一块地址
+        cout << ptr << " " << second << endl;
+        if(!ptr.unique())
+            // 我们给ptr重新分配了一块地址，内容手动做了拷贝。
+            ptr.reset(new int(*ptr));
+        // output: 0x4e7140 0x4e7130, 指向不同地址
+        cout << ptr << " " << second << endl;
+        *ptr += 1024;
+        // output: 2048 1024
+        cout << *ptr << " " << *second << endl;
+    ```
+
+* Another Example
+    ```objectivec
+    // use shared_ptr pointing to a variable
+    std::shared_ptr<int> p = make_shared<int>(12);
+    *p = 22;
+    cout << *p << endl;
+    // use shared_ptr pointing to a object.
+    std::shared_ptr<string> ps = make_shared<string>();
+    cout << ps << endl;
+    std::shared_ptr<string> psEmpty;
+    cout << psEmpty << endl;
+    *ps = "asdfadsf";
+    cout << *ps << endl;
+    cout << *ps.get() << endl;
+    cout << ps.get() << endl;
+    // array calls delete[] to free so we must pass our own deleter.
+    // Not good idea tp control array with smart pointer, better use vector.
+    shared_ptr<int> parr(new int[10]{}, std::default_delete<int[]>());
+    int* pt = parr.get();
+    cout << pt[3] << endl;
+    pt[3] = 5;
+    cout << pt[3] << endl;
+    ```
+
+#### unique_ptr
+Once the object holding unique pointer gc, gc all recourses for unique pointer. 
+![Imgur](https://i.imgur.com/OsBLlx5.png)
+
+* Basic Example
+    ```objectivec
+     int* p = new int(1024);
+     unique_ptr<int> ptr(p);
+     int* second = new int(2048);
+     ptr.reset(second);   //此处reset函数将会释放p的内存。
+   //-----Below is WRONG!!! -------------------
+   //  cout << *p << endl;
+   //  *p = 1234;
+   //   cout << *p << endl;
+    ```
+    
+    * Source Code for reset
+        ```objectivec
+              void
+              reset(pointer __p = pointer()) noexcept
+              {
+        	using std::swap;
+        	swap(std::get<0>(_M_t), __p);   //交换两个指针。   
+        	if (__p != pointer())   // 通过删除器释放原来指针所指向的空间。
+        	  get_deleter()(__p);
+              }
+        ```
+* release: 放弃对当前自由空间的控制权，需要通过删除器手动释放该空间。
+    ```objectivec
+    /// Release ownership of any stored pointer.
+          pointer
+          release() noexcept
+          {
+    	pointer __p = get();
+    	std::get<0>(_M_t) = pointer();
+    	return __p;
+          }
+    ```
+
+* Example for smart pointer on an array.
+```objectivec
+template<typename T>
+Stack<T>::Stack(long size) {
+    Stack::size = size;
+    unique_ptr<T[]> temp(new T[size], std::default_delete<T[]>());
+    stack = std::move(temp); // or use stack.reset(temp.release);
+    cur = 0;
+}
+```
     
 ### Reference
-1. [C++ primer: Chapter 3](http://www.charleshouserjr.com/Cplus2.pdf)
+1. C++ Primer edition 5, Chapter 12.
