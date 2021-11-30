@@ -4,18 +4,17 @@ gems:
   #- jekyll-archives # Sorry, not GitHub pages friendly!
   - jekyll-sitemap
   - jekyll-paginate
-  
+
 exclude:
   - "/vendor/"
 
 # Site settings
 title: Seanforfun
-subtitle: "Be Patient and Focused."
-email: xiaob6@mcmaster.ca
+subtitle: "Let's try one more time."
+email: xiao.botao@outlook.com
 name: Botao Xiao
 description: >
-  Welcome to Botao Xiao's techblog.
-  This blog is powered by centrarium.
+  Welcome to Botao Xiao's technical blog!
 # Base URL of site (i.e. /blog). It should always start with a slash,
 # and never end with a slash. Set it to a blank value if hosting at the
 # root of your server.
@@ -76,7 +75,7 @@ social:
 #    username: TheBenCentra
 #    url: https://twitter.com/TheBenCentra
 #    desc: Follow me on Twitter
-#    share: true  
+#    share: true
 
   - name: GitHub
     icon: github
@@ -90,8 +89,8 @@ social:
     username: Botao Xiao
     url: https://www.linkedin.com/in/botao-xiao-03304b167/
     desc: Connect with me on LinkedIn
-    share: true  
-   
+    share: true
+
   - name: Facebook
     icon: facebook
     username: Botao Xiao
